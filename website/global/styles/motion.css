@@ -20,10 +20,6 @@
   pointer-events:none;
   mix-blend-mode:multiply;
 }
-@media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]) .gdb-pencil{ mix-blend-mode:screen; }
-}
-:root[data-theme="dark"] .gdb-pencil{ mix-blend-mode:screen; }
 
 /* ---------------------------------------------------------- blueprint */
 [data-blueprint]{

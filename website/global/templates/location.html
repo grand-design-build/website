@@ -133,11 +133,11 @@
   /* trust bar — single line, no boxes */
   .trust-strip{
     background:var(--bg-soft); border-bottom:1px solid var(--rule);
-    text-align:center; padding:18px 24px; font-size:0.82rem; color:var(--ink-soft);
-    letter-spacing:0.02em;
+    display:flex; flex-wrap:wrap; justify-content:center; align-items:center;
+    gap:8px 28px; text-align:center; padding:18px 24px;
   }
-  .trust-strip .sep{color:var(--ink-faint); margin:0 12px;}
-  .trust-strip .star{color:var(--accent);}
+  .trust-strip .item{font-size:0.82rem; font-weight:600; color:var(--ink-soft); letter-spacing:0.01em; white-space:nowrap;}
+  .trust-strip .star{color:var(--accent); margin-right:2px;}
 
   /* intro block */
   .intro{max-width:760px; margin:0 auto; text-align:center;}
@@ -349,7 +349,8 @@
     .card-grid{grid-template-columns:1fr;}
     .reviews-grid{grid-template-columns:1fr;}
     .crosslink-grid{grid-template-columns:1fr 1fr;}
-    .trust-strip{font-size:0.76rem; line-height:1.9;}
+    .trust-strip{gap:6px 16px; padding:14px 18px;}
+    .trust-strip .item{font-size:0.76rem;}
   }
 </style>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Lato:wght@300;400;600;700&display=swap">
@@ -417,9 +418,12 @@
   </div>
 </div>
 
-<!-- ===================== TRUST BAR — single line, no boxes ===================== -->
+<!-- ===================== TRUST BAR — distinct items, spaced out ===================== -->
 <div class="trust-strip">
-  HCRA Licensed &amp; Fully Insured<span class="sep">·</span>15+ Years in Business<span class="sep">·</span>250+ Projects Completed<span class="sep">·</span><span class="star">★★★★★</span> 4.9 (30 Google Reviews)
+  <span class="item">HCRA Licensed &amp; Fully Insured</span>
+  <span class="item">15+ Years in Business</span>
+  <span class="item">250+ Projects Completed</span>
+  <span class="item"><span class="star">★★★★★</span> 4.9 (30 Google Reviews)</span>
 </div>
 
 <!-- ===================== INTRO ===================== -->

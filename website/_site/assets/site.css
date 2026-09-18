@@ -66,12 +66,7 @@ h1,h2,h3{
 .logo{display:flex; align-items:center; flex:none; text-decoration:none;}
 .logo img{display:block; height:34px; width:auto;}
 .logo .logo-invert{display:none;}
-@media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]) .logo img{display:none;}
-  :root:not([data-theme="light"]) .logo .logo-invert{display:block;}
-}
-:root[data-theme="dark"] .logo img{display:none;}
-:root[data-theme="dark"] .logo .logo-invert{display:block;}
+
 .logo-foot img{height:30px;}
 
 /* BREADCRUMBS. Small, quiet, and they must always work -- they are a real
@@ -177,13 +172,16 @@ h1,h2,h3{
 }
 .hero-ctas{display:flex; gap:14px; justify-content:center; flex-wrap:wrap;}
 
-/* trust bar — single line, no boxes */
+/* trust bar — distinct items with real space, not one crowded sentence */
 .trust-strip{
   background:var(--bg-soft); border-bottom:1px solid var(--rule);
-  text-align:center; padding:26px 24px; font-size:1rem; font-weight:600; color:var(--ink); letter-spacing:0.02em;
+  display:flex; flex-wrap:wrap; justify-content:center; align-items:center;
+  gap:10px 32px; text-align:center; padding:22px 24px;
 }
-.trust-strip .sep{color:var(--ink-faint); margin:0 12px;}
-.trust-strip .star{color:var(--accent);}
+.trust-strip .item{
+  font-size:0.92rem; font-weight:600; color:var(--ink-soft); letter-spacing:0.01em; white-space:nowrap;
+}
+.trust-strip .star{color:var(--accent); margin-right:2px;}
 
 section{padding:76px 0;}
 .eyebrow{
@@ -420,7 +418,8 @@ footer{background:var(--bg-soft); border-top:1px solid var(--rule); padding:48px
   /* the call to action lands at the foot of the drawer, full width */
   .nav-drawer-cta{display:block; border-bottom:0; margin-top:18px;}
   .nav-drawer-cta .btn{display:block; text-align:center; padding:15px; font-size:0.92rem;}
-  .trust-strip{font-size:0.9rem; line-height:2;}
+  .trust-strip{gap:8px 18px; padding:18px 20px;}
+  .trust-strip .item{font-size:0.82rem;}
 }
 @media (max-width:520px){
   .services, .rev-grid, .blog-grid{grid-template-columns:1fr;}
