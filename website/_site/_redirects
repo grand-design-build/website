@@ -1,0 +1,46 @@
+# 301 redirects — duplicate-content cleanup from the 2026-09-15 URL map.
+# Generated from audit-data/findings/url-redirect-map-2026-09-15.md. Do not hand-edit;
+# regenerate if that map changes. Every other live URL is rebuilt at its own address.
+
+/grand-design-build-blog/most-expensive-homes-in-canada                                         /blogs/most-expensive-homes-in-canada/  301
+/grand-design-build-blog/most-expensive-homes-in-canada/                                        /blogs/most-expensive-homes-in-canada/  301
+/grand-design-build-blog/cost-to-demolish-and-rebuild-a-house-in-ontario                        /blogs/cost-to-demolish-and-rebuild-a-house-in-ontario/  301
+/grand-design-build-blog/kitchen-renovation-cost-in-canada-2025-budget-pricing-guide            /blogs/kitchen-renovation-cost-in-canada-2026/  301
+/blogs/kitchen-renovation-cost-in-canada-2025/                                                  /blogs/kitchen-renovation-cost-in-canada-2026/  301
+/blogs/kitchen-renovation-cost-in-canada-2025-budget-pricing-guide/                             /blogs/kitchen-renovation-cost-in-canada-2026/  301
+/grand-design-build-blog/ontario-building-code-guide                                            /blogs/ontario-building-code-guide/  301
+/grand-design-build-blog/city-of-toronto-building-permit-renovation                             /blogs/city-of-toronto-building-permit-renovation/  301
+/blogs/house-extension-cost-in-toronto-2025/                                                    /blogs/house-extension-cost-in-toronto-2026/  301
+/grand-design-build-blog/house-extension-cost-in-toronto-2025                                   /blogs/house-extension-cost-in-toronto-2026/  301
+/grand-design-build-blog/toronto-building-permit-how-to-apply                                   /blogs/toronto-building-permit-how-to-apply/  301
+/grand-design-build-blog/home-building-funding-canada-grants-loans-rebates-for-homeowners-2025  /blogs/home-building-funding-canada-grants-loans-rebates-for-homeowners-2025/  301
+/blogs/home-addition-cost-toronto-2026/                                                         /blogs/home-addition-cost-toronto/  301
+/grand-design-build-blog/ontario-home-renovation-savings-program                                /blogs/ontario-home-renovation-savings-program/  301
+/grand-design-build-blog/toronto-1200-sqft-renovation-cost                                      /blogs/toronto-1200-sqft-renovation-cost/  301
+/about-us                                                                                       /about-us/  301
+/grand-design-build-blog/toronto-building-permit-guide-2025                                     /blogs/toronto-building-permit-guide-2025/  301
+/blogs/how-much-does-it-cost-to-build-a-house/                                                  /grand-design-build-blog/how-much-does-it-cost-to-build-a-house  301
+/services/design-and-permits                                                                    /services/design-and-permits/  301
+/grand-design-build-blog/apply-for-a-building-permit-laneway-and-garden-suites-toronto          /blogs/apply-for-a-building-permit-laneway-and-garden-suites-toronto/  301
+/services/laneway-housing/                                                                      /services/laneway-housing  301
+/grand-design-build-blog/toronto-home-permits-zoning-guide                                      /blogs/toronto-home-permits-zoning-guide/  301
+/services/home-addition                                                                         /services/home-addition/  301
+/services/home-renovation                                                                       /services/home-renovation/  301
+/grand-design-build-blog/custom-home-building-vs-buying-toronto                                 /blogs/custom-home-building-vs-buying-toronto/  301
+/grand-design-build-blog/demolition-toronto-permit                                              /blogs/demolition-toronto-permit/  301
+/grand-design-build-blog/why-toronto-property-closings-are-failing-what-you-can-do              /blogs/why-toronto-property-closings-are-failing-what-you-can-do/  301
+/our-portfolio                                                                                  /our-portfolio/  301
+/blogs/home-building-tips-guide-for-first-time-builders/                                        /grand-design-build-blog/home-building-tips-guide-for-first-time-builders  301
+/grand-design-build-blog/luxury-home-renovation-ideas                                           /blogs/luxury-home-renovation-ideas/  301
+/grand-design-build-blog/canada-inflation-home-improvement-2025                                 /blogs/canada-inflation-home-improvement-2025/  301
+/blogs/toronto-housing-slowdown-2025/                                                           /grand-design-build-blog/toronto-housing-slowdown-2025  301
+/grand-design-build-blog/home-addition-toronto                                                  /blogs/home-addition-toronto/  301
+/grand-design-build-blog/toronto-home-addition-permits-challenges-tips                          /blogs/toronto-home-addition-permits-challenges-tips/  301
+/grand-design-build-blog/bathroom-renovation-contractor-in-toronto                              /blogs/bathroom-renovation-contractor-in-toronto/  301
+/blogs/building-a-home-from-scratch-guide-2025/                                                 /grand-design-build-blog/building-a-home-from-scratch-guide-2025  301
+
+# HubSpot's old ?hsLang= and ?hs_amp= variants: Cloudflare Pages matches the path,
+# and query strings are carried through, so the path rules above already cover them.
+
+# SPA-style catch-all deliberately omitted: a missing page must return a real 404,
+# not a soft-200 homepage, or Search Console reports soft-404s across the site.

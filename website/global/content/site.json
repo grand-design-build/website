@@ -1,0 +1,71 @@
+{
+  "_comment": "GLOBAL CONTENT. Every fact that appears on more than one page lives here and nowhere else. Change a phone number, an address, a menu item or a CTA once in this file and it updates across the whole site. If you find yourself editing the same sentence on two pages, it belongs here.",
+
+  "business": {
+    "name": "Grand Design Build",
+    "tagline": "From Design to Warranty",
+    "phone": "(416) 920-6066",
+    "phoneHref": "tel:+14169206066",
+    "email": "info@granddesignbuild.com",
+    "address": {
+      "street": "1558 Avenue Road",
+      "city": "North York",
+      "province": "ON",
+      "postalCode": "M5M 3X5",
+      "country": "CA"
+    },
+    "hours": "Monday – Friday, 8:00 am – 4:00 pm. Saturdays by appointment.",
+    "credentials": "HCRA Licensed · Fully Insured",
+    "domain": "https://granddesignbuild.com"
+  },
+
+  "cta": {
+    "primary":   { "label": "Start Your Project",   "href": "/contact-us/" },
+    "secondary": { "label": "Book a Consultation",  "href": "/contact-us/" },
+    "phone":     { "label": "Call (416) 920-6066",  "href": "tel:+14169206066" }
+  },
+
+  "social": {
+    "facebook":  "",
+    "instagram": "",
+    "linkedin":  ""
+  },
+
+  "analytics": {
+    "gtmContainer": "GTM-5X6T52PR"
+  },
+
+  "nav": [
+    { "label": "Home",      "href": "/" },
+    { "label": "Services",  "href": "/services/",      "children": "services" },
+    { "label": "Portfolio", "href": "/our-portfolio/" },
+    { "label": "Locations", "href": "/locations/",     "children": "locations" },
+    { "label": "About",     "href": "/about-us/" },
+    { "label": "Blog",      "href": "/blogs/" }
+  ],
+
+  "services": [
+    { "label": "Design & Permits",          "href": "/services/design-and-permits/" },
+    { "label": "Home Renovation",           "href": "/services/home-renovation/" },
+    { "label": "Home Addition",             "href": "/services/home-addition/" },
+    { "label": "Custom Build",              "href": "/services/custom-build/" },
+    { "label": "Laneway & Garden Suites",   "href": "/services/laneway-housing/" },
+    { "label": "Multiplex",                 "href": "/services/multiplex/" },
+    { "label": "Project Management",        "href": "/services/project-management/" },
+    { "label": "Property Management",       "href": "/services/property-management/" }
+  ],
+
+  "locations": [
+    { "label": "Forest Hill",        "href": "/custom-home-builder-forest-hill/" },
+    { "label": "Bayview Village",    "href": "/custom-home-builder-bayview-village/" },
+    { "label": "Bloor West Village", "href": "/custom-home-builder-bloor-west-village/" },
+    { "label": "Cliffcrest",         "href": "/custom-home-builder-cliffcrest/" },
+    { "label": "Danforth",           "href": "/custom-home-builder-danforth/" },
+    { "label": "Leaside",            "href": "/custom-home-builder-leaside/" },
+    { "label": "Ledbury Park",       "href": "/custom-home-builder-ledbury-park/" },
+    { "label": "North York",         "href": "/custom-home-builder-north-york/" },
+    { "label": "Rosedale",           "href": "/custom-home-builder-rosedale/" },
+    { "label": "The Beaches",        "href": "/custom-home-builder-the-beaches/" },
+    { "label": "Willowdale",         "href": "/custom-home-builder-willowdale/" }
+  ]
+}

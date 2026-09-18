@@ -1,0 +1,79 @@
+/* GDB MOTION -- the drafting layer.
+   Pairs with global/scripts/motion.js. Everything here is decoration and
+   every rule is switched off for touch devices and for visitors who ask for
+   reduced motion. Content must never depend on any of it. */
+
+/* ----------------------------------------------------------- the pencil */
+/* The line is drawn ON the page, the way graphite sits on paper -- but it
+   MULTIPLIES rather than covers. A mid-grey stroke in multiply mode darkens
+   what is underneath it and can never hide it, so headlines and photographs
+   stay completely legible while the line still reads as a real pencil mark.
+   In dark mode the same trick runs the other way with screen.
+
+   It cannot be painted behind the page: the sections carry their own
+   backgrounds (about two thirds of the homepage by height), and a layer at
+   z-index:-1 is invisible under every one of them. Blend mode is what lets
+   the line sit on top without ever being in the way. */
+.gdb-pencil{
+  position:fixed; inset:0;
+  z-index:40;                 /* under the sticky nav (50), over everything else */
+  pointer-events:none;
+  mix-blend-mode:multiply;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]) .gdb-pencil{ mix-blend-mode:screen; }
+}
+:root[data-theme="dark"] .gdb-pencil{ mix-blend-mode:screen; }
+
+/* ---------------------------------------------------------- blueprint */
+[data-blueprint]{
+  fill:none;
+  stroke:var(--blueprint);
+  stroke-width:1.25;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  vector-effect:non-scaling-stroke;
+}
+[data-blueprint] *{ fill:none; }
+
+/* Where a finished photograph sits under the drawing, it fades up as the
+   outline completes -- line becomes building. */
+[data-blueprint-photo]{
+  opacity:0;
+  transition:opacity 1.2s ease 0.9s;
+}
+[data-blueprint].is-drawn ~ [data-blueprint-photo],
+[data-blueprint-photo].is-drawn{ opacity:1; }
+
+/* ------------------------------------------------------------ reveals */
+/* Hidden only once motion.js is running and has said so by putting
+   .js-reveal on <html>. Without that class -- no JS, a blocked script, a
+   thrown error -- every section renders plainly instead of staying at
+   opacity 0 forever. The portfolio is nothing but photographs; it may not
+   depend on the motion layer to be visible at all. */
+.js-reveal [data-reveal]{
+  opacity:0;
+  transform:translateY(14px);
+  transition:opacity 0.7s cubic-bezier(.22,.61,.36,1),
+             transform 0.7s cubic-bezier(.22,.61,.36,1);
+  will-change:opacity, transform;
+}
+.js-reveal [data-reveal].is-in{ opacity:1; transform:none; }
+
+/* A heading reads better arriving from a touch further down. */
+.js-reveal [data-reveal="lead"]{ transform:translateY(24px); }
+
+/* ----------------------------------------------------------- magnetic */
+.btn{ transition:transform 0.25s cubic-bezier(.22,.61,.36,1), background 0.2s ease; }
+
+/* --------------------------------------------------------------- off */
+/* No cursor, no trail. No exceptions -- and nothing may be hidden behind it. */
+@media (hover:none), (pointer:coarse){
+  .gdb-pencil{ display:none; }
+}
+@media (prefers-reduced-motion:reduce){
+  .gdb-pencil{ display:none; }
+  .js-reveal [data-reveal]{ opacity:1; transform:none; transition:none; }
+  [data-blueprint-photo]{ opacity:1; transition:none; }
+  .btn{ transition:none; }
+}

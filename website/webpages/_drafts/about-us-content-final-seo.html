@@ -1,0 +1,442 @@
+<title>GDB About Us — Final SEO Copy (live-sourced)</title>
+<style>
+  :root{
+    --bg:#f6f1e6;
+    --bg-card:#efe4d1;
+    --bg-card-line:#e0d2b8;
+    --ink:#221d16;
+    --ink-soft:#5c5346;
+    --ink-faint:#8c8171;
+    --accent:#bd6a2e;
+    --rule:#ddd0b4;
+    --live-bg:#e4ecdf;
+    --live-line:#c7d8bd;
+    --live-text:#3d5c34;
+    --cut-bg:#f3dcd6;
+    --cut-text:#8a3a2a;
+    --new-bg:#f4e6c8;
+    --new-line:#e0cb96;
+    --new-text:#7a5a17;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#1b1712; --bg-card:#241f18; --bg-card-line:#352d21;
+      --ink:#f1e9da; --ink-soft:#c3b8a4; --ink-faint:#8f8574;
+      --accent:#e08a44; --rule:#352d21;
+      --live-bg:#20281d; --live-line:#354a2c; --live-text:#a9cf9a;
+      --cut-bg:#3a2620; --cut-text:#e0a293;
+      --new-bg:#332912; --new-line:#5c4a1e; --new-text:#e0c383;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#1b1712; --bg-card:#241f18; --bg-card-line:#352d21;
+    --ink:#f1e9da; --ink-soft:#c3b8a4; --ink-faint:#8f8574;
+    --accent:#e08a44; --rule:#352d21;
+    --live-bg:#20281d; --live-line:#354a2c; --live-text:#a9cf9a;
+    --cut-bg:#3a2620; --cut-text:#e0a293;
+    --new-bg:#332912; --new-line:#5c4a1e; --new-text:#e0c383;
+  }
+
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .page{max-width:780px; margin:0 auto; padding:56px 28px 96px;}
+  .masthead{
+    display:flex; justify-content:space-between; align-items:baseline;
+    padding-bottom:24px; margin-bottom:36px; border-bottom:1px solid var(--rule);
+  }
+  .masthead .brand{font-family:"Fraunces",Georgia,serif; font-weight:700; font-size:1.05rem;}
+  .masthead .doc-title{font-size:0.85rem; color:var(--ink-soft);}
+
+  h1{
+    font-family:"Fraunces",Georgia,serif; font-weight:700;
+    font-size:clamp(1.8rem,4vw,2.3rem); line-height:1.15; margin:0 0 10px;
+  }
+  .lead{font-size:1rem; line-height:1.55; color:var(--ink-soft); max-width:66ch; margin:0 0 20px;}
+
+  .legend{display:flex; flex-wrap:wrap; gap:10px; margin-bottom:28px;}
+  .legend span{
+    font-size:0.76rem; font-weight:700; letter-spacing:0.03em; padding:5px 12px; border-radius:20px;
+  }
+  .legend .l-live{background:var(--live-bg); color:var(--live-text); border:1px solid var(--live-line);}
+  .legend .l-new{background:var(--new-bg); color:var(--new-text); border:1px solid var(--new-line);}
+  .legend .l-cut{background:var(--cut-bg); color:var(--cut-text);}
+
+  .summary{
+    background:var(--bg-card); border:1px solid var(--bg-card-line); border-radius:4px;
+    padding:20px 22px; margin-bottom:44px;
+  }
+  .summary h3{font-family:"Fraunces",Georgia,serif; font-size:1rem; margin:0 0 10px;}
+  .summary ul{margin:0; padding-left:20px;}
+  .summary li{font-size:0.92rem; line-height:1.55; color:var(--ink-soft); margin-bottom:6px;}
+  .summary b{color:var(--ink);}
+
+  section{margin-bottom:44px;}
+  .sec-num{
+    display:inline-flex; align-items:center; gap:10px;
+    font-size:0.72rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase;
+    color:var(--accent); margin:0 0 8px;
+  }
+  h2{
+    font-family:"Fraunces",Georgia,serif; font-weight:700;
+    font-size:1.4rem; line-height:1.2; margin:0 0 14px;
+  }
+  .block{
+    background:var(--bg-card); border:1px solid var(--bg-card-line); border-radius:2px;
+    padding:20px 22px; margin-bottom:12px;
+  }
+  .block-label{
+    font-size:0.72rem; font-weight:700; letter-spacing:0.06em; text-transform:uppercase;
+    color:var(--ink-faint); margin:0 0 8px; display:flex; align-items:center; gap:8px;
+  }
+  .tag{font-size:0.64rem; font-weight:700; letter-spacing:0.04em; padding:2px 8px; border-radius:10px; text-transform:uppercase;}
+  .tag-live{background:var(--live-bg); color:var(--live-text); border:1px solid var(--live-line);}
+  .tag-new{background:var(--new-bg); color:var(--new-text); border:1px solid var(--new-line);}
+  .block p{font-size:0.96rem; line-height:1.6; color:var(--ink); margin:0 0 10px;}
+  .block p:last-child{margin-bottom:0;}
+  .block strong{color:var(--ink);}
+  .headline-option{
+    font-family:"Fraunces",Georgia,serif; font-weight:700; font-size:1.2rem;
+    color:var(--ink); margin:0 0 4px;
+  }
+
+  .live-note{
+    background:var(--live-bg); border:1px solid var(--live-line); border-radius:2px;
+    padding:12px 16px; margin-bottom:12px; font-size:0.86rem; line-height:1.55; color:var(--live-text);
+  }
+  .live-note b{display:block; font-size:0.72rem; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; margin-bottom:4px;}
+
+  .new-note{
+    background:var(--new-bg); border:1px solid var(--new-line); border-radius:2px;
+    padding:12px 16px; margin-bottom:12px; font-size:0.86rem; line-height:1.55; color:var(--new-text);
+  }
+  .new-note b{display:block; font-size:0.72rem; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; margin-bottom:4px;}
+
+  .cut-note{
+    background:var(--cut-bg); border-radius:2px;
+    padding:12px 16px; margin-bottom:12px; font-size:0.86rem; line-height:1.55; color:var(--cut-text);
+  }
+  .cut-note b{display:block; font-size:0.72rem; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; margin-bottom:4px;}
+
+  .grid2{display:grid; grid-template-columns:1fr 1fr; gap:12px;}
+  .card{background:var(--bg-card); border:1px solid var(--bg-card-line); border-radius:2px; padding:16px 18px;}
+  .card b{display:block; font-family:"Fraunces",Georgia,serif; font-size:1rem; margin-bottom:4px;}
+  .card span{display:block; font-size:0.88rem; line-height:1.5; color:var(--ink-soft);}
+
+  .steps{list-style:none; margin:0; padding:0; counter-reset:step;}
+  .steps li{
+    counter-increment:step; display:grid; grid-template-columns:28px 1fr; gap:12px;
+    padding:10px 0; border-top:1px solid var(--rule);
+  }
+  .steps li:first-child{border-top:none; padding-top:0;}
+  .steps li::before{
+    content:counter(step); font-family:"Fraunces",Georgia,serif; font-weight:700;
+    color:var(--accent); font-size:0.95rem;
+  }
+  .steps b{display:block; font-size:0.95rem;}
+  .steps span{display:block; font-size:0.86rem; color:var(--ink-soft); line-height:1.5;}
+
+  .quote-card{
+    background:var(--bg-card); border-left:3px solid var(--accent); border-radius:2px;
+    padding:16px 20px; margin-bottom:10px;
+  }
+  .quote-card p{font-style:italic; font-size:0.94rem; color:var(--ink); line-height:1.55; margin:0 0 6px;}
+  .quote-card cite{font-style:normal; font-size:0.82rem; color:var(--ink-faint);}
+  .quote-card mark{background:none; color:var(--accent); font-weight:700; font-style:normal;}
+
+  .faq-q{font-weight:700; font-size:0.96rem; margin:0 0 4px;}
+  .faq-a{font-size:0.92rem; line-height:1.55; color:var(--ink-soft); margin:0;}
+  .faq-item{padding:12px 0; border-top:1px solid var(--rule);}
+  .faq-item:first-child{border-top:none; padding-top:0;}
+
+  .areas{display:flex; flex-wrap:wrap; gap:8px; margin:0 0 10px;}
+  .areas span{
+    background:var(--bg-card); border:1px solid var(--bg-card-line); border-radius:20px;
+    padding:5px 14px; font-size:0.86rem; color:var(--ink);
+  }
+  .areas span.new{background:var(--new-bg); border-color:var(--new-line); color:var(--new-text);}
+
+  .wc{font-size:0.78rem; color:var(--ink-faint); font-weight:600;}
+
+  @media (max-width:560px){ .grid2{grid-template-columns:1fr;} }
+</style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Inter:wght@400;500;600;700&display=swap">
+
+<div class="page">
+
+  <div class="masthead">
+    <div class="brand">GDB</div>
+    <div class="doc-title">About Us — final copy (live-sourced)</div>
+  </div>
+
+  <h1>About Us Copy, Final Draft</h1>
+  <p class="lead">Same method as the homepage deck: the <strong>about-us-template.html mockup</strong> sets the structure — section order, which sections exist, how many items in each. The <strong>words</strong> come from the live /about-us/ page wherever a live equivalent exists, pulled verbatim from granddesignbuild.com, not paraphrased. Where a mockup slot has no live equivalent, it's flagged rather than quietly invented.</p>
+
+  <div class="legend">
+    <span class="l-live">LIVE — verbatim or trimmed, never reworded</span>
+    <span class="l-new">NEW — no live equivalent, flagged for your call</span>
+    <span class="l-cut">CUT — on live, left out here</span>
+  </div>
+
+  <div class="summary">
+    <h3>The short version</h3>
+    <ul>
+      <li><b>~1,450 words down to ~640.</b> Almost the entire cut is guarantee preamble and testimonial length. No section of the live page is lost except "We Show Up" — and that copy is preserved inside Our Story rather than deleted.</li>
+      <li>The four guarantees run <b>~95 words each on live</b>, and each one opens with preamble ("At Grand Design Build, your safety and peace of mind come first…") before reaching the actual promise. Trimmed to ~28 words each; every promise kept, nothing reworded into new claims.</li>
+      <li><b>Seven testimonials cut to three.</b> The full versions stay on Google — link out rather than reprint 620 words of them.</li>
+      <li>The live H1 is just <b>"About Us"</b> — a wasted H1 on the page that ranks for brand plus "Toronto custom home builder." Recommended replacement below, with the mockup's version as the alternative.</li>
+      <li>The mockup adds one section the live page doesn't have at all: <b>Meet the Team</b>. Flagged — and I'd hold it back from publish until real headshots exist.</li>
+      <li><b>Two numbers need confirming before publish:</b> "15+ Years / since 2010" and "250+ Projects." Both come from the homepage draft, not the live About page, where they were flagged as new copy too.</li>
+      <li>Nothing here touches WordPress. Copy only, for whoever's building the Elementor template.</li>
+    </ul>
+  </div>
+
+  <section>
+    <p class="sec-num">00 · Before the fold even loads</p>
+    <h2>Title Tag &amp; Meta Description</h2>
+    <div class="new-note">
+      <b>Why this is new</b>
+      The live About page has no real meta description, and its H1 is the literal string "About Us." Both are pure upside — nothing is being replaced that was working.
+    </div>
+    <div class="block">
+      <p class="block-label"><span class="tag tag-new">new</span> Title tag — 58 characters</p>
+      <p class="headline-option">About Grand Design Build | Toronto Custom Home Builders</p>
+    </div>
+    <div class="block">
+      <p class="block-label"><span class="tag tag-new">new</span> Meta description — 154 characters</p>
+      <p>Toronto design-build firm, HCRA licensed since 2010. Architect, designer and builder under one contract, with fixed pricing and a 7-year structural guarantee.</p>
+    </div>
+    <div class="block">
+      <p class="block-label">Breadcrumb</p>
+      <p>Home / About Us</p>
+    </div>
+  </section>
+
+  <section>
+    <p class="sec-num">01 · Hero</p>
+    <h2>Who We Are</h2>
+    <div class="block">
+      <p class="block-label"><span class="tag tag-live">live, verbatim</span> Eyebrow</p>
+      <p>WHO WE ARE</p>
+    </div>
+    <div class="block">
+      <p class="block-label"><span class="tag tag-live">live, trimmed</span> H1 — recommended</p>
+      <p class="headline-option">We're Not Your Average Toronto Construction Company</p>
+      <p><span class="wc">Keeps the live opening line's voice and rhythm, but adds "Toronto construction" to an H1 that currently carries zero keywords.</span></p>
+    </div>
+    <div class="block">
+      <p class="block-label"><span class="tag tag-live">live, verbatim</span> H1 — alternative, exactly as the mockup has it</p>
+      <p class="headline-option">Grand Design Build is not your average construction company.</p>
+    </div>
+    <div class="block">
+      <p class="block-label"><span class="tag tag-live">live, verbatim</span> Body</p>
+      <p>We are builders, problem solvers, and perfectionists, operating at the intersection of design and craftsmanship. From custom homes to full-scale renovations, we don't just transform spaces. We transform the way people live.</p>
+    </div>
+    <div class="block">
+      <p class="block-label"><span class="tag tag-live">live, trimmed</span> Tagline</p>
+      <p class="headline-option">Based in Toronto. HCRA licensed since 2010. Built on excellence.</p>
+    </div>
+    <div class="cut-note">
+      <b>Cut — "Recognized across the industry"</b>
+      The live tagline ends on it, but there is no award, publication, or certification anywhere on the page to back it up. Swapped for the HCRA licence, which is a real, checkable credential and does the same job better.
+    </div>
+    <div class="new-note">
+      <b>New — credentials strip</b>
+      Four items, using the same figures as the homepage strip so the numbers stay consistent site-wide. The live About page carries no proof points at all above the fold.
+    </div>
+    <div class="grid2">
+      <div class="card"><b>15+ Years</b><span>Building and renovating in Toronto</span></div>
+      <div class="card"><b>250+ Projects</b><span>Completed across Toronto and the GTA</span></div>
+      <div class="card"><b>HCRA Licensed</b><span>Fully insured on every project</span></div>
+      <div class="card"><b>4.9 &#9733;</b><span>Average client rating</span></div>
+    </div>
+    <p class="wc">~55 words</p>
+  </section>
+
+  <section>
+    <p class="sec-num">02 · The founder story</p>
+    <h2>Our Story</h2>
+    <div class="block">
+      <p class="block-label"><span class="tag tag-live">live, verbatim</span> Eyebrow + H2 + body</p>
+      <p>OUR STORY</p>
+      <p>Allen Misaghi didn't build Grand Design Build overnight. He built it the hard way, through relentless dedication, an uncompromising eye for quality, and a refusal to settle for anything less than exceptional.</p>
+      <p>What started as one man's pursuit of excellence grew into one of Toronto's most recognized names in construction and architectural development. Project by project. Client by client. Building by building.</p>
+    </div>
+    <div class="quote-card">
+      <p>"This isn't just a company. It's what never stopping looks like."</p>
+      <cite>Pull-quote — live, verbatim</cite>
+    </div>
+    <div class="block">
+      <p class="block-label"><span class="tag tag-live">live, trimmed</span> Closing beat</p>
+      <p>On every jobsite. For every client. Through every challenge. That's not a slogan — that's how Grand Design Build was built, and it's how we operate every day.</p>
+    </div>
+    <div class="cut-note">
+      <b>Cut as a section, kept as a line — "We Show Up"</b>
+      The mockup deletes this standalone section, and that's the right call: it's a header with no substance under it. But the copy itself is the strongest writing on the live page, so it folds in here as the closer instead of disappearing.
+    </div>
+    <p class="wc">~105 words</p>
+  </section>
+
+  <section>
+    <p class="sec-num">03 · What we do</p>
+    <h2>What We Build</h2>
+    <div class="live-note">
+      <b>Heading change</b>
+      Live and mockup both say "What We Do." "What We Build" is one word different and marginally stronger for a construction page. Low stakes either way — revert if you'd rather keep the live string exactly.
+    </div>
+    <div class="block">
+      <p class="block-label"><span class="tag tag-live">live, verbatim</span> Body</p>
+      <p><strong>Custom homes. Full renovations. Home additions. Laneway suites. Architectural development.</strong></p>
+      <p>We take on the projects others won't. We finish what we start. And we do it at a standard that speaks for itself long after the last nail is driven.</p>
+    </div>
+    <div class="new-note">
+      <b>New — one added line</b>
+      The live About page never states the one thing that actually differentiates GDB, even though it's the reason three of the seven testimonials exist. It's live copy on the homepage, just missing here.
+    </div>
+    <div class="block">
+      <p>Architect, interior designer, and builder are all in-house, on one contract. One team is accountable from first drawing to final walkthrough.</p>
+    </div>
+    <p class="wc">~70 words</p>
+  </section>
+
+  <section>
+    <p class="sec-num">04 · The people</p>
+    <h2>Meet the Team</h2>
+    <div class="new-note">
+      <b>New — entire section, not on the live page</b>
+      The live About page is founder-story-only, which quietly undercuts every "one team" claim made elsewhere on the site. Added per Bilal's request, reusing the homepage team-grid component.
+    </div>
+    <div class="block">
+      <p class="block-label">Eyebrow / H2 / sub</p>
+      <p>THE PEOPLE BEHIND IT</p>
+      <p class="headline-option">Meet the Team</p>
+      <p>One accountable team from design through warranty — not a one-man show.</p>
+    </div>
+    <div class="grid2">
+      <div class="card"><b>Allen</b><span>Founder</span></div>
+      <div class="card"><b>Hamid</b><span>Architect</span></div>
+      <div class="card"><b>Joseph</b><span>Sales</span></div>
+      <div class="card"><b>Rashi</b><span>Marketing</span></div>
+      <div class="card"><b>Amy</b><span>Finance &amp; Operations</span></div>
+      <div class="card"><b>Ozlem</b><span>Design</span></div>
+      <div class="card"><b>Daniela</b><span>Design</span></div>
+      <div class="card"><b>Ali</b><span>Site Logistics</span></div>
+    </div>
+    <div class="cut-note">
+      <b>Hold this section until headshots exist</b>
+      Eight grey placeholder circles read worse than no team section at all. Everything else on this page can ship without it.
+    </div>
+  </section>
+
+  <section>
+    <p class="sec-num">05 · Why trust us</p>
+    <h2>Why Toronto Trusts Us</h2>
+    <div class="block">
+      <p class="block-label"><span class="tag tag-live">live, verbatim</span> Eyebrow / H2 / sub</p>
+      <p>WHY TORONTO TRUSTS US</p>
+      <p class="headline-option">We Don't Just Build Structures. We Build Trust.</p>
+      <p>Over a decade of delivering on our promises. A client list built entirely on referrals, reputation, and results.</p>
+    </div>
+    <div class="live-note">
+      <b>Keep the live sub-banner</b>
+      GUARANTEED — Right Plan &#9679; Right Team &#9679; Right Price. It's tight, it's already live, and the mockup drops it for no reason. Use it as the eyebrow directly above the four guarantee cards.
+    </div>
+    <div class="cut-note">
+      <b>The actual cut — ~390 words down to ~130</b>
+      All four live guarantees open with preamble before reaching the promise. Every promise below is intact and in the original's own words; only the throat-clearing is gone. No guarantee has been strengthened, softened, or invented.
+    </div>
+    <div class="block">
+      <p class="block-label"><span class="tag tag-live">live, trimmed</span> &#10003; Fully Insured &amp; Licensed</p>
+      <p>Licensed by the HCRA and fully insured under all provincial and municipal regulations — structural construction and specialized trades alike. Your project is protected, compliant, and run by qualified professionals.</p>
+    </div>
+    <div class="block">
+      <p class="block-label"><span class="tag tag-live">live, trimmed</span> &#8962; Seven-Year Structural Guarantee</p>
+      <p>A seven-year structural guarantee on every new home we build, plus a satisfaction guarantee on the process itself. You should love the build and the result.</p>
+    </div>
+    <div class="block">
+      <p class="block-label"><span class="tag tag-live">live, trimmed</span> &#9670; Exceptional Craftsmanship</p>
+      <p>A high-quality finish free of defects at handover. We take a limited number of projects each year, so yours gets the time and attention to detail it deserves.</p>
+    </div>
+    <div class="block">
+      <p class="block-label"><span class="tag tag-live">live, trimmed</span> $ Fixed-Price Contracts</p>
+      <p>Sign a fixed-price contract with detailed, itemized quotations. Your price is final and includes everything in the contract. No hidden extras, no surprises, no increases for unforeseen items.</p>
+    </div>
+    <p class="wc">~130 words, down from ~390</p>
+  </section>
+
+  <section>
+    <p class="sec-num">06 · Commitment</p>
+    <h2>Our Commitment</h2>
+    <div class="block">
+      <p class="block-label"><span class="tag tag-live">live, verbatim</span> Standalone statement</p>
+      <p>Our commitment is simple: transparent communication, disciplined execution, and exceptional results.</p>
+    </div>
+  </section>
+
+  <section>
+    <p class="sec-num">07 · Proof</p>
+    <h2>What Our Clients Say</h2>
+    <div class="cut-note">
+      <b>Seven testimonials down to three</b>
+      The mockup picked Will / David Mitchell / Lima — two Custom Build and one Renovation, and it drops the single most persuasive review on the page. The three below cover all three service lines and lead with the rescue story. Full versions of all seven stay on Google; link out rather than reprint 620 words.
+    </div>
+    <div class="quote-card">
+      <p>"Professional, knowledgeable, and easy to work with throughout. They took the time to understand our needs and provided <mark>complimentary interior design support</mark>. The project stayed on track from start to finish."</p>
+      <cite>&#9733;&#9733;&#9733;&#9733;&#9733; — Hasan G., Renovation &amp; Addition — live, trimmed</cite>
+    </div>
+    <div class="quote-card">
+      <p>"After a frustrating experience with another builder who left us with poor workmanship, we had to start over. From day one the team <mark>listened, understood, and genuinely cared about making things right</mark>. The finished home speaks for itself."</p>
+      <cite>&#9733;&#9733;&#9733;&#9733;&#9733; — Mark F., Full Home Renovation — live, trimmed</cite>
+    </div>
+    <div class="quote-card">
+      <p>"I like how they simplified the building process with <mark>in-house architect, interior design and builder</mark>. The team came up with lots of great ideas to make the house both functional and beautiful."</p>
+      <cite>&#9733;&#9733;&#9733;&#9733;&#9733; — David Mitchell, Custom Build — live, trimmed</cite>
+    </div>
+    <div class="block">
+      <p class="block-label"><span class="tag tag-new">new</span> Below the grid</p>
+      <p>4.9 average rating &#183; Read all reviews &#8594;</p>
+    </div>
+    <p class="wc">~110 words, down from ~620</p>
+  </section>
+
+  <section>
+    <p class="sec-num">08 · Close</p>
+    <h2>Final CTA</h2>
+    <div class="block">
+      <p class="block-label"><span class="tag tag-new">new</span> Eyebrow / H2 / sub / buttons</p>
+      <p>READY WHEN YOU ARE</p>
+      <p class="headline-option">Start Planning Your Project</p>
+      <p>One team, one design centre, one fixed price — from first drawing to final walkthrough.</p>
+      <p><strong>Start Your Project</strong> &#183; <strong>Book a Consultation</strong></p>
+    </div>
+  </section>
+
+  <section>
+    <p class="sec-num">09 · NAP</p>
+    <h2>Name, Address, Phone</h2>
+    <div class="block">
+      <p class="block-label"><span class="tag tag-live">live, verbatim</span> Must match Google Business Profile exactly</p>
+      <p>Grand Design Build &#183; 1558 Avenue Rd, North York, ON M5M 3X5</p>
+      <p><strong>(416) 920-6066</strong> &#183; info@granddesignbuild.com</p>
+      <p>Mon&ndash;Fri 8:00 am &ndash; 4:00 pm &#183; Saturdays by appointment</p>
+    </div>
+  </section>
+
+  <section>
+    <p class="sec-num">10 · Before this ships</p>
+    <h2>Open Items</h2>
+    <div class="summary">
+      <ul>
+        <li><b>Phone number bug in the mockup.</b> The nav in about-us-template.html uses <code>tel:+16470000000</code> / "(647) 000-0000". The real number is <b>(416) 920-6066</b>. The same placeholder is likely sitting in the other page templates too — worth a sweep.</li>
+        <li><b>Confirm two claims.</b> "15+ Years / since 2010" and "250+ Projects" both come from the homepage draft, not the live About page. They were flagged as new copy there as well, so neither has been verified against records yet.</li>
+        <li><b>Schema is missing entirely.</b> This page should carry <code>AboutPage</code> + <code>Organization</code> with the NAP, the HCRA licence, and <code>aggregateRating</code> 4.9. The live page has none.</li>
+        <li><b>Headshots</b> gate the Meet the Team section. Everything else can ship without them.</li>
+        <li><b>Total: ~640 words, down from ~1,450.</b></li>
+      </ul>
+    </div>
+  </section>
+
+</div>

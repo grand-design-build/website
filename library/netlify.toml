@@ -1,0 +1,36 @@
+# Grand Design Build -- Material Library
+# Static site. No build step, no dependencies.
+# Deploy: drag this folder onto Netlify, or connect the repo and set
+#   Build command:    (leave empty)
+#   Publish directory: material-library-site
+
+[build]
+  publish = "."
+  command = ""
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+# Fingerprint-free assets: revalidate so a redeploy is picked up immediately.
+[[headers]]
+  for = "/assets/js/*"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/assets/css/*"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+# The catalogue is no longer shipped with the site -- it is served only to a
+# signed-in client, so there is nothing here to cache.
+
+# The dashboard is for the team; keep it out of search results entirely.
+[[headers]]
+  for = "/admin.html"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"

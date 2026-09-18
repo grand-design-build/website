@@ -1,0 +1,36 @@
+# Applies to every response.
+#
+# PRE-LAUNCH: the X-Robots-Tag line keeps this deployment out of Google entirely.
+# It is the lock that actually works - a crawler has to fetch the page to read it,
+# and when it does, noindex/nofollow/noarchive tells it to index nothing, follow
+# nothing, and keep no cached copy.
+#
+# AT GO-LIVE, DELETE THE X-Robots-Tag LINE BELOW, or the real site is never
+# indexed. Lift it together with the Disallow in robots.txt - see that file.
+/*
+  X-Frame-Options: SAMEORIGIN
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Robots-Tag: noindex, nofollow, noarchive
+
+# Shared header/footer source. Not pages - never let them be indexed as pages.
+/_partials/*
+  X-Robots-Tag: noindex
+
+# Copy-review documents. Internal working drafts, not pages - never index them.
+/_content/*
+  X-Robots-Tag: noindex
+
+# The shared stylesheet and script change rarely and are fingerprint-free,
+# so revalidate rather than cache hard.
+/assets/*
+  Cache-Control: public, max-age=0, must-revalidate
+
+/material-selections/assets/js/*
+  Cache-Control: public, max-age=0, must-revalidate
+
+/material-selections/assets/css/*
+  Cache-Control: public, max-age=0, must-revalidate
+
+/material-selections/assets/data/*
+  Cache-Control: public, max-age=300

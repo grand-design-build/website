@@ -1,0 +1,62 @@
+/* GDB DESIGN TOKENS — the one file that controls the look of the whole site.
+   Colour, and nothing else, lives here. Change a value and every page,
+   every component and the material library all move together.
+   Nothing in this file is page-specific. Never hard-code a colour anywhere
+   else; add a token here and reference it as var(--name).
+
+   These are the brand's real values, from brand-assets/Colours/ and the brand
+   reference: Black #000000, Charcoal #54595F, Signal Orange #F78C1E,
+   White #FFFFFF, plus the agreed web neutrals. They match the material
+   library exactly, which is the point — one system, not two.
+
+   ORANGE IS THE ONLY ACCENT and it must stay rare: CTAs, links, the dot in
+   the logo. To decorate, reach for --rule or --ink-faint, never --accent. */
+
+:root{
+  /* grounds */
+  --bg:#FFFFFF;             /* White        -- page ground             */
+  --bg-soft:#F6F7F7;        /* Off-White    -- alternating sections     */
+  --card:#F6F7F7;           /* Off-White    -- panels, cards            */
+  --card-line:#E3E4E6;      /* Stone        -- panel borders            */
+  --rule:#E3E4E6;           /* Stone        -- hairlines, dividers      */
+
+  /* ink */
+  --ink:#000000;            /* Black        -- headings, deep text      */
+  --ink-soft:#54595F;       /* Charcoal     -- body copy                */
+  --ink-faint:#8A8F94;      /* Charcoal, light -- captions, meta        */
+
+  /* the one accent */
+  --accent:#F78C1E;         /* Signal Orange                           */
+  --accent-dark:#CB7319;    /* Orange, Deep -- hover / active          */
+  --accent-tint:#FEEEDD;    /* Orange, Tint -- badges, highlights      */
+
+  /* dark ground, used for the footer and inverted sections */
+  --dark:#1D1F21;           /* Charcoal, Deep                          */
+  --dark-text:#F6F7F7;
+
+  /* the drafting layer. --pencil-rgb is read by motion.js, so it must stay
+     a bare "r, g, b" triplet -- the script supplies the alpha. */
+  --pencil-rgb:84, 89, 95;  /* Charcoal -- graphite on paper           */
+  --blueprint:#C3C6C9;
+}
+
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#1D1F21; --bg-soft:#26282B; --card:#26282B; --card-line:#3A3D40;
+    --rule:#3A3D40;
+    --ink:#F6F7F7; --ink-soft:#C3C6C9; --ink-faint:#8A8F94;
+    --accent:#F78C1E; --accent-dark:#FFA648; --accent-tint:#3A2A18;
+    --dark:#141517; --dark-text:#F6F7F7;
+    --pencil-rgb:246, 247, 247;   /* chalk on slate */
+    --blueprint:#4A4D50;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#1D1F21; --bg-soft:#26282B; --card:#26282B; --card-line:#3A3D40;
+  --rule:#3A3D40;
+  --ink:#F6F7F7; --ink-soft:#C3C6C9; --ink-faint:#8A8F94;
+  --accent:#F78C1E; --accent-dark:#FFA648; --accent-tint:#3A2A18;
+  --dark:#141517; --dark-text:#F6F7F7;
+  --pencil-rgb:246, 247, 247;
+  --blueprint:#4A4D50;
+}

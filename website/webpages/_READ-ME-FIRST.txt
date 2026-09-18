@@ -1,0 +1,16 @@
+DO NOT OPEN THE .html FILES IN THIS FOLDER DIRECTLY.
+
+They are sources, not pages. The design, the menu, the footer and the
+photographs are all added when the site is built. Opened on their own they
+look like plain black text on white with broken images -- nothing is wrong,
+you are just looking at the ingredients instead of the meal.
+
+TO LOOK AT THE WEBSITE:
+
+    Go up two folders to GDB and double-click  preview.command
+
+That rebuilds the site and opens it in your browser. Leave the Terminal
+window open while you are looking at it, and close it when you are done.
+
+Edit the files in here, save, then double-click preview.command again to see
+the change.

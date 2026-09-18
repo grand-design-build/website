@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en-CA">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Team Dashboard &#8212; Grand Design Build</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#F6F7F7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1D1F21" media="(prefers-color-scheme: dark)">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/img/brand/favicon-32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&amp;family=Lato:wght@300;400;600;700&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/app.css?v=32">
+<link rel="stylesheet" href="/assets/motion.css">
+<link rel="stylesheet" href="assets/css/admin.css?v=32">
+</head>
+<body>
+
+<!-- ============================================================= gate -->
+<section class="gate" id="gate">
+  <div class="gate-card">
+    <img class="gate-logo on-light" src="assets/img/brand/logo.png" alt="Grand Design Build" width="220" height="46">
+    <img class="gate-logo on-dark" src="assets/img/brand/logo-dark.png" alt="" aria-hidden="true" width="220" height="46">
+    <h1>Team Dashboard</h1>
+    <p class="lede">One password for the whole team. Everything in the library is managed from here.</p>
+    <form id="gateForm">
+      <div class="field"><input id="gateCode" type="password" placeholder="Team password" autocomplete="current-password" required></div>
+      <button class="btn wide" type="submit" id="gateGo">Sign in</button>
+      <div class="status" id="gateStatus" role="status"></div>
+    </form>
+  </div>
+</section>
+
+<!-- ============================================================== app -->
+<div class="app" id="app" hidden>
+  <header class="bar">
+    <div class="wrap bar-in">
+      <button class="ident" id="home">
+        <img class="ident-logo on-light" src="assets/img/brand/logo.png" alt="Grand Design Build" width="200" height="42">
+        <img class="ident-logo on-dark" src="assets/img/brand/logo-dark.png" alt="" aria-hidden="true" width="200" height="42">
+        <span class="ident-n">Team Dashboard</span>
+      </button>
+      <nav class="nav" id="nav">
+        <button class="nav-i on" data-view="overview">Overview</button>
+        <button class="nav-i" data-view="clients">Clients</button>
+        <button class="nav-i" data-view="products">Products</button>
+        <button class="nav-i" data-view="settings">Settings</button>
+      </nav>
+      <div class="bar-actions">
+        <button class="pill" id="refresh">Refresh</button>
+        <button class="icon-btn" id="signOut" title="Sign out" aria-label="Sign out">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M10 4H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h4M16 16l4-4-4-4M20 12H10"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap adm">
+
+    <!-- ------------------------------------------------------ overview -->
+    <section class="pane" id="v-overview">
+      <div class="adm-head">
+        <span class="eyebrow">Today</span>
+        <h1>Where everything stands</h1>
+        <p class="lede" id="ovSub">Reading the library&#8230;</p>
+      </div>
+      <div class="tiles" id="ovTiles"></div>
+      <div class="ov-cols">
+        <section class="ov-col">
+          <h2 class="sec-h">Latest activity</h2>
+          <div id="ovRecent"><p class="adm-empty">Loading&#8230;</p></div>
+        </section>
+        <section class="ov-col">
+          <h2 class="sec-h">Most chosen</h2>
+          <div id="ovTop"><p class="adm-empty">Loading&#8230;</p></div>
+        </section>
+      </div>
+      <section class="ov-gaps" id="ovGaps" hidden>
+        <h2 class="sec-h">Worth filling in</h2>
+        <div class="gap-row" id="ovGapRow"></div>
+      </section>
+    </section>
+
+    <!-- ------------------------------------------------------- clients -->
+    <section class="pane" id="v-clients" hidden>
+      <div class="adm-head row">
+        <div>
+          <span class="eyebrow">Clients</span>
+          <h1>Who has access</h1>
+          <p class="lede" id="clSub">&nbsp;</p>
+        </div>
+        <button class="btn accent" id="addClient">Add a client</button>
+      </div>
+      <div class="tbl" id="clTable"></div>
+    </section>
+
+    <!-- -------------------------------------------------- one client -->
+    <section class="pane" id="v-client" hidden>
+      <button class="back" id="clBack">&#8592; All clients</button>
+      <div class="adm-head row">
+        <div>
+          <span class="eyebrow" id="cdProject">Selections</span>
+          <h1 id="cdName">&nbsp;</h1>
+          <p class="lede" id="cdSub">&nbsp;</p>
+        </div>
+        <div class="head-acts">
+          <button class="pill" id="cdEdit">Edit client</button>
+          <button class="pill" id="cdCopy">Copy invite</button>
+          <button class="pill" id="cdCsv">Download CSV</button>
+        </div>
+      </div>
+      <div id="cdBody"></div>
+    </section>
+
+    <!-- ------------------------------------------------------ products -->
+    <section class="pane" id="v-products" hidden>
+      <div class="adm-head row">
+        <div>
+          <span class="eyebrow">Catalogue</span>
+          <h1>Products</h1>
+          <p class="lede" id="prSub">&nbsp;</p>
+        </div>
+        <button class="btn accent" id="addProduct">Add a product</button>
+      </div>
+      <div class="tools">
+        <div class="tool-search">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          <input id="prQ" type="search" placeholder="Search product, brand, SKU&#8230;" autocomplete="off">
+        </div>
+        <select id="prRoom" class="sel"><option value="">All rooms</option></select>
+        <select id="prState" class="sel">
+          <option value="live">Live</option>
+          <option value="off">Hidden from clients</option>
+          <option value="all">Everything</option>
+        </select>
+        <select id="prGap" class="sel">
+          <option value="">No filter</option>
+          <option value="photo">Missing a photo</option>
+          <option value="price">Missing a price</option>
+        </select>
+      </div>
+      <div class="tbl" id="prTable"></div>
+      <div class="more-wrap"><button class="btn ghost" id="prMore" hidden>Show more</button></div>
+    </section>
+
+    <!-- ------------------------------------------------------ settings -->
+    <section class="pane" id="v-settings" hidden>
+      <div class="adm-head">
+        <span class="eyebrow">Settings</span>
+        <h1>Team access</h1>
+        <p class="lede">One password gets the whole team in here. Change it whenever somebody leaves.</p>
+      </div>
+      <form class="form narrow" id="setForm">
+        <label class="lab">Team password
+          <input id="setCode" type="text" autocomplete="off" spellcheck="false">
+        </label>
+        <p class="hint">At least six characters. Everyone signs in with this one.</p>
+        <label class="lab">Client sessions stay open for
+          <input id="setHours" type="number" min="1" max="168" step="1">
+        </label>
+        <p class="hint">Hours. After this a client signs in again; their selections are kept.</p>
+        <div class="form-acts">
+          <button class="btn accent" type="submit" id="setGo">Save</button>
+          <span class="status" id="setStatus" role="status"></span>
+        </div>
+      </form>
+      <div class="fine-print">
+        <h2 class="sec-h">Underneath</h2>
+        <p class="hint">Products and selections are stored in a Google Sheet that nobody needs to open &#8212; this dashboard is the way in. If you ever want the raw rows, <a id="setSheet" href="#" target="_blank" rel="noopener">open the sheet</a>.</p>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- =========================================================== drawer -->
+<div class="scrim" id="scrim"></div>
+<aside class="panel" id="panel" aria-hidden="true">
+  <div class="panel-top">
+    <h2 id="panelTitle">Edit</h2>
+    <button class="x" id="panelX" aria-label="Close">&times;</button>
+  </div>
+  <div class="panel-body" id="panelBody"></div>
+  <div class="panel-foot" id="panelFoot"></div>
+</aside>
+
+<div class="toast" id="toast" role="status"></div>
+
+<script src="/assets/motion.js" defer></script>
+<script src="assets/js/data.js?v=32"></script>
+<script src="assets/js/admin.js?v=32"></script>
+</body>
+</html>

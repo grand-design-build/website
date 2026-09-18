@@ -1,0 +1,94 @@
+<!-- Sitewide structured data. Goes in <head> on EVERY page.
+     This is the one description of the business that Google, Bing and the AI
+     answer engines read. Facts here must match global/content/site.json and
+     the Google Business Profile exactly -- a mismatch in the name, address or
+     phone number is what stops a contractor ranking locally.
+     Page-specific schema (Service, FAQPage, BlogPosting) goes in the page. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "GeneralContractor",
+      "@id": "https://granddesignbuild.com/#business",
+      "name": "Grand Design Build",
+      "description": "Design-build contractor in Toronto delivering custom homes, additions and renovations under one contract, from design to warranty.",
+      "url": "https://granddesignbuild.com/",
+      "telephone": "+1-416-920-6066",
+      "email": "info@granddesignbuild.com",
+      "priceRange": "$$$",
+      "image": "https://granddesignbuild.com/images/hero-storefront.webp",
+      "logo": {
+        "@type": "ImageObject",
+        "@id": "https://granddesignbuild.com/#logo",
+        "url": "https://granddesignbuild.com/assets/img/brand/logo.png"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "1558 Avenue Road",
+        "addressLocality": "North York",
+        "addressRegion": "ON",
+        "postalCode": "M5M 3X5",
+        "addressCountry": "CA"
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+          "opens": "08:00",
+          "closes": "16:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "Saturday",
+          "description": "By appointment only"
+        }
+      ],
+      "areaServed": [
+        { "@type": "City",  "name": "Toronto" },
+        { "@type": "Place", "name": "North York" },
+        { "@type": "Place", "name": "Forest Hill" },
+        { "@type": "Place", "name": "Bayview Village" },
+        { "@type": "Place", "name": "Bloor West Village" },
+        { "@type": "Place", "name": "Cliffcrest" },
+        { "@type": "Place", "name": "Danforth" },
+        { "@type": "Place", "name": "Leaside" },
+        { "@type": "Place", "name": "Ledbury Park" },
+        { "@type": "Place", "name": "Rosedale" },
+        { "@type": "Place", "name": "The Beaches" },
+        { "@type": "Place", "name": "Willowdale" }
+      ],
+      "hasCredential": "HCRA Licensed",
+      "slogan": "From Design to Warranty",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "reviewCount": "30",
+        "bestRating": "5"
+      },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Services",
+        "itemListElement": [
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Design and Permits" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Home Renovation" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Home Addition" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Custom Home Building" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Laneway and Garden Suites" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Multiplex Construction" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Project Management" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Property Management" } }
+        ]
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://granddesignbuild.com/#website",
+      "url": "https://granddesignbuild.com/",
+      "name": "Grand Design Build",
+      "publisher": { "@id": "https://granddesignbuild.com/#business" },
+      "inLanguage": "en-CA"
+    }
+  ]
+}
+</script>

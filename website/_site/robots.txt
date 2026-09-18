@@ -1,0 +1,19 @@
+# PRE-LAUNCH LOCKDOWN. This site is not public yet.
+#
+# Nothing here is meant to be crawled, indexed, or discoverable until the DNS
+# cutover. Two separate locks are in place, and BOTH must be lifted at go-live:
+#
+#   1. this file          - Disallow: / below
+#   2. _headers           - the X-Robots-Tag: noindex line on /*
+#
+# Note how they interact: a crawler that obeys Disallow never fetches the page,
+# so it never sees the noindex header. Disallow alone does NOT guarantee a URL
+# stays out of the index - Google can still list a bare URL it finds linked from
+# somewhere else. That is why the noindex header stays on as well, and why the
+# only real guarantee is putting the deployment behind Cloudflare Access.
+#
+# The sitemap is deliberately NOT advertised here, and sitemap.xml is not
+# committed - it is a generated file, git-ignored until launch.
+
+User-agent: *
+Disallow: /

@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en-CA">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Material Library — Grand Design Build</title>
+<meta name="description" content="Browse every finish in the Grand Design Build design centre on Avenue Road. Build your palette room by room.">
+<meta name="theme-color" content="#F6F7F7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1D1F21" media="(prefers-color-scheme: dark)">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/img/brand/favicon-32.png">
+<link rel="apple-touch-icon" href="assets/img/brand/mark-180.png">
+<meta name="robots" content="noindex">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://script.google.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Lato:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/app.css?v=32">
+<link rel="stylesheet" href="/assets/motion.css">
+</head>
+<body>
+
+
+<div class="scrollbar" id="scrollbar" aria-hidden="true"><i></i></div>
+
+<!-- ============================ sign in =========================== -->
+<section class="gate" id="gate" hidden>
+  <div class="gate-card">
+    <img class="gate-logo on-light" src="assets/img/brand/logo.png" alt="Grand Design Build" width="220" height="46">
+    <img class="gate-logo on-dark" src="assets/img/brand/logo-dark.png" alt="" aria-hidden="true" width="220" height="46">
+    <h1>Material Library</h1>
+    <p class="lede">Sign in with the email and access code we sent you. Your selections save to your project, so you can pick up where you left off.</p>
+    <form id="gateForm">
+      <div class="field"><input id="gateEmail" type="email" placeholder="Your email" autocomplete="email" required></div>
+      <div class="field"><input id="gateCode" type="password" placeholder="Access code" autocomplete="current-password" required></div>
+      <button class="btn wide" type="submit" id="gateGo">Enter the library</button>
+      <div class="status" id="gateStatus" role="status"></div>
+    </form>
+    <p class="gate-help">Need a code, or access for someone else on your project? Email <a href="mailto:design@granddesignbuild.com">design@granddesignbuild.com</a>.</p>
+  </div>
+</section>
+
+<div class="app" id="app" hidden>
+<header class="bar" id="bar">
+  <div class="wrap bar-in">
+    <button class="ident" id="home" data-magnetic aria-label="Grand Design Build - Material Library, back to all rooms">
+      <img class="ident-logo on-light" src="assets/img/brand/logo.png" alt="Grand Design Build" width="200" height="42">
+      <img class="ident-logo on-dark" src="assets/img/brand/logo-dark.png" alt="" aria-hidden="true" width="200" height="42">
+      <span class="ident-n">Material Library</span>
+    </button>
+
+    <div class="search" id="searchWrap">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+      <input id="search" type="search" placeholder="Search materials, brands, finishes&hellip;" autocomplete="off" aria-label="Search the library">
+      <button class="search-clear" id="searchClear" aria-label="Clear search">&times;</button>
+      <kbd>/</kbd>
+    </div>
+
+    <div class="bar-actions">
+      <span class="whoami" id="whoami" hidden></span>
+      <button class="pill" id="selBtn" data-magnetic>Selections <span class="ct" id="selCt">0</span></button>
+      <button class="icon-btn" id="signOut" title="Sign out" aria-label="Sign out" hidden>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M10 4H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h4M16 16l4-4-4-4M20 12H10"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="notice" id="notice" role="status"></div>
+
+<!-- ============================ rooms ============================ -->
+<main>
+<section class="view view-rooms is-on" id="viewRooms">
+  <div class="wrap">
+    <div class="hero">
+      <span class="eyebrow" data-reveal>The Design Centre, Online</span>
+      <h1 data-reveal data-reveal-split>Every finish in your home, in one place.</h1>
+      <p class="lede" data-reveal>Browse the same materials we hold in the design centre on Avenue Road. Build your palette room by room, then bring it to your next selection meeting &mdash; or send it to us and we&rsquo;ll price it.</p>
+      <span class="rule" data-reveal></span>
+    </div>
+    <div class="rooms" id="roomsGrid"></div>
+    <div class="rooms-foot">
+      <p class="fine">Pricing shown is supplier list at time of publication and is confirmed in your fixed&#8209;price proposal.</p>
+      <button class="btn ghost" id="browseAll" data-magnetic>Browse the full library</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ browse =========================== -->
+<section class="view view-browse" id="viewBrowse" hidden>
+  <div class="wrap">
+    <nav class="crumbs" id="crumbs" aria-label="Breadcrumb"></nav>
+    <div class="browse">
+      <aside class="rail" id="rail" aria-label="Filters"></aside>
+      <div class="main">
+        <div class="tools">
+          <span class="count" id="count"></span>
+          <div class="tools-r">
+            <button class="pill filter-btn" id="filterBtn">Filters</button>
+            <label class="sort">
+              <span class="sr">Sort by</span>
+              <select id="sort">
+                <option value="curated">Sort &mdash; Curated</option>
+                <option value="name">Sort &mdash; Name A&ndash;Z</option>
+                <option value="price-asc">Sort &mdash; Price, low to high</option>
+                <option value="price-desc">Sort &mdash; Price, high to low</option>
+                <option value="brand">Sort &mdash; Brand</option>
+              </select>
+            </label>
+          </div>
+        </div>
+        <div class="grid" id="grid"></div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- ============================ overlays ========================= -->
+<div class="scrim" id="scrim"></div>
+
+<aside class="panel panel-detail" id="detail" aria-hidden="true" aria-label="Material detail">
+  <div class="panel-top">
+    <h2 id="detailTitle">Material</h2>
+    <button class="x" data-close aria-label="Close">&times;</button>
+  </div>
+  <div class="panel-body" id="detailBody"></div>
+  <div class="panel-foot detail-acts" id="detailFoot"></div>
+</aside>
+
+<aside class="panel panel-sel" id="selPanel" aria-hidden="true" aria-label="My selections">
+  <div class="panel-top">
+    <h2>My Selections</h2>
+    <button class="x" data-close aria-label="Close">&times;</button>
+  </div>
+  <div class="panel-body" id="selBody"></div>
+  <div class="panel-foot" id="selFoot" hidden></div>
+</aside>
+
+<div class="cmp-bar" id="cmpBar" aria-hidden="true">
+  <span class="cmp-lb">Compare</span>
+  <span class="cmp-th" id="cmpThumbs"></span>
+  <button class="btn accent" id="cmpOpen" data-magnetic>View</button>
+  <button class="x" id="cmpClear" aria-label="Clear comparison">&times;</button>
+</div>
+
+<div class="cmp-sheet" id="cmpSheet" aria-hidden="true">
+  <div class="panel-top wrap">
+    <h2>Side by side</h2>
+    <button class="x" data-close aria-label="Close">&times;</button>
+  </div>
+  <div class="cmp-cols wrap" id="cmpCols"></div>
+</div>
+
+</div><!-- /app -->
+
+<!-- The pencil trail is one global system for the whole domain. -->
+<script src="/assets/motion.js" defer></script>
+<script src="assets/js/data.js?v=32"></script>
+<script src="assets/js/motion.js?v=32"></script>
+<script src="assets/js/app.js?v=32"></script>
+</body>
+</html>
