@@ -259,7 +259,13 @@ body.home .sec-sub{text-align:left; margin:0 0 48px;}
    blog, every location page), so its default stays centered and this scopes
    the left-aligned treatment to body.home specifically. */
 body.home .hero{justify-content:flex-start; text-align:left;}
-body.home .hero-inner{width:100%; max-width:1120px; margin:0 auto; box-sizing:border-box; padding:80px 32px;}
+/* Narrower than the page's usual 1120px column, and margin:0 rather than
+   auto -- an auto margin on a flex item overrides the parent's
+   justify-content:flex-start, which would have silently re-centered this
+   at wide viewports. Keeps the hero copy in a left-hand column with the
+   photo/video showing through on the right, the way B3 Interiors' hero
+   does. */
+body.home .hero-inner{width:100%; max-width:640px; margin:0; box-sizing:border-box; padding:80px 32px;}
 body.home .hero .eyebrow::after{margin:16px 0 0;}
 body.home .hero p{margin:20px 0 30px;}
 body.home .hero-ctas{justify-content:flex-start;}
