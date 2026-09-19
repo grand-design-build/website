@@ -37,6 +37,16 @@
   navHeight();
   window.addEventListener('resize', navHeight);
 
+  /* Homepage header: transparent over the hero until scrolled, then solid --
+     see body.home rules in site.css. The class is toggled here regardless of
+     page, which is harmless everywhere else since no other page's CSS reads
+     it. */
+  function onScroll() {
+    document.body.classList.toggle('scrolled', window.scrollY > 80);
+  }
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+
   function setOpen(open) {
     if (!toggle || !menu) return;
     menu.classList.toggle('is-open', open);

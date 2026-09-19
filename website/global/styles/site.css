@@ -76,6 +76,41 @@ h1,h2,h3{
 .logo img{display:block; height:34px; width:auto;}
 .logo .logo-invert{display:none;}
 
+/* Homepage only -- header starts transparent, overlaying the hero video, and
+   turns solid once scrolled past it, same pattern as B3 Interiors and Versa.
+   Not every page opens with .hero (about.html uses .about-hero, others use
+   .breadcrumb), so this is scoped to body.home rather than the shared .nav.
+   `scrolled` is toggled on <body> by site.js; harmless on other pages since
+   only body.home reads it. */
+body.home .nav{
+  position:fixed; top:0; left:0; right:0;
+  background:transparent; border-bottom-color:transparent;
+  transition:background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+body.home .nav-inner > ul > li > a{color:#fff;}
+body.home .nav-inner > ul > li > a::after{background:#fff;}
+body.home .nav-phone{color:#fff;}
+body.home .nav-phone:hover{color:var(--accent);}
+body.home .nav-toggle{color:#fff;}
+/* logo-dark.png (the intended white-on-dark asset) turned out not to be
+   real transparent white artwork -- it has an opaque near-white backing box
+   behind gray text, so swapping to it looked broken over the hero. Using a
+   CSS filter on the working logo.png (confirmed real alpha transparency)
+   instead: brightness(0) flattens it to solid black, invert(1) flips that
+   to white, alpha stays intact either way. */
+body.home .logo img:not(.logo-invert){filter:brightness(0) invert(1);}
+
+body.home.scrolled .nav{
+  background:rgba(255,255,255,0.95); backdrop-filter:blur(10px);
+  border-bottom-color:var(--rule); box-shadow:0 8px 24px rgba(0,0,0,0.08);
+}
+body.home.scrolled .nav-inner > ul > li > a{color:var(--ink);}
+body.home.scrolled .nav-inner > ul > li > a::after{background:var(--accent);}
+body.home.scrolled .nav-phone{color:var(--ink);}
+body.home.scrolled .nav-phone:hover{color:var(--accent);}
+body.home.scrolled .nav-toggle{color:var(--ink);}
+body.home.scrolled .logo img:not(.logo-invert){filter:none;}
+
 .logo-foot img{height:30px;}
 
 /* BREADCRUMBS. Small, quiet, and they must always work -- they are a real
@@ -88,15 +123,15 @@ h1,h2,h3{
 .breadcrumb a:hover{color:var(--accent); text-decoration:underline;}
 .breadcrumb .sep{margin:0 8px; color:var(--rule);}
 .breadcrumb .here{color:var(--ink-faint);}
-.nav ul{list-style:none; display:flex; gap:22px; margin:0; padding:0; font-size:0.86rem; font-weight:600; flex:none;}
+.nav ul{list-style:none; display:flex; gap:22px; margin:0; padding:0; font-size:var(--text-base); font-weight:600; flex:none;}
 .nav ul a{color:var(--ink); text-decoration:none; white-space:nowrap;}
-.nav > ul > li > a{position:relative; display:inline-block; padding-bottom:6px;}
-.nav > ul > li > a::after{
+.nav-inner > ul > li > a{position:relative; display:inline-block; padding-bottom:6px;}
+.nav-inner > ul > li > a::after{
   content:""; position:absolute; left:0; right:0; bottom:0; height:2px; background:var(--accent);
   transform:scaleX(0); transform-origin:left; transition:transform 0.2s ease;
 }
-.nav > ul > li > a:hover::after,
-.nav > ul > li > a.active::after{transform:scaleX(1);}
+.nav-inner > ul > li > a:hover::after,
+.nav-inner > ul > li > a.active::after{transform:scaleX(1);}
 .nav ul li{position:relative;}
 .dropdown{
   display:none; position:absolute; top:100%; left:0; background:var(--bg);
@@ -455,7 +490,12 @@ footer{background:var(--bg-soft); border-top:1px solid var(--rule); padding:48px
   .nav ul.is-open{display:flex;}
   .nav ul > li{border-bottom:1px solid var(--rule);}
   .nav ul > li > a{display:block; padding:16px 4px; font-size:1.02rem;}
-  .nav > ul > li > a::after{display:none;}
+  .nav-inner > ul > li > a::after{display:none;}
+  /* The drawer itself is always solid white, even on the transparent
+     homepage header -- so its text must always be dark, regardless of
+     scroll position. Without this, the transparent-header white text
+     rule made the open drawer's menu invisible (white on white). */
+  body.home .nav-inner > ul.is-open > li > a{color:var(--ink);}
 
   /* submenus open in place, as an accordion */
   .dropdown{
