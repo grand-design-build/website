@@ -269,11 +269,23 @@ body.home .hero{justify-content:flex-start; text-align:left;}
    column now comes from a max-width on the text elements themselves,
    below, not from constraining this positioning box. */
 body.home .hero-inner{width:100%; max-width:1120px; margin:0 auto; box-sizing:border-box; padding:80px 32px 48px;}
-body.home .hero-inner h1,
 body.home .hero-inner .hero-tagline,
 body.home .hero-inner p{max-width:640px;}
 body.home .hero .eyebrow::after{margin:16px 0 0;}
 body.home .hero p{margin:20px 0 30px;}
+
+/* Homepage H1: still a real <h1> for SEO, but styled as a quiet pill badge
+   (B3 Interiors does the same thing with "Whole-Home Millwork. One
+   Source.") instead of competing with the tagline below it for attention.
+   Plain sans, not italic -- the badge itself is meant to be unobtrusive. */
+body.home .hero-inner h1{
+  display:inline-block; max-width:640px;
+  font-family:"Lato","Helvetica Neue",Arial,sans-serif;
+  font-size:var(--text-xs); font-weight:600; letter-spacing:0.02em;
+  color:#fff; line-height:1.4;
+  background:rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.22);
+  border-radius:999px; padding:8px 18px; margin:0 0 22px;
+}
 body.home .hero-ctas{justify-content:flex-start;}
 
 /* claim-list -- numbered, left-aligned rows with a claim headline and a short
