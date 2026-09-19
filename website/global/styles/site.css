@@ -345,7 +345,7 @@ body.home .hero-ctas{justify-content:flex-start;}
 /* Two-column "why us / compare" layout, homepage only -- left column is the
    pitch (eyebrow, headline, one line, a CTA), right column is the existing
    numbered .claim-list. Same shape as Swede's "Why Swede" section. */
-.compare-grid{display:grid; grid-template-columns:1fr 1.3fr; gap:64px; align-items:start;}
+.compare-grid{display:grid; grid-template-columns:1fr 1.3fr; gap:36px; align-items:start;}
 .compare-intro .eyebrow{text-align:left;}
 .compare-intro .eyebrow::after{display:none;}
 .compare-intro .eyebrow.rule-left{display:flex; align-items:center; gap:10px;}
@@ -354,6 +354,7 @@ body.home .hero-ctas{justify-content:flex-start;}
 .compare-intro .sec-sub{text-align:left; margin-left:0;}
 .highlight{background:var(--accent-tint); padding:0 6px; box-decoration-break:clone; -webkit-box-decoration-break:clone;}
 .compare-grid .claim-list{margin-top:0;}
+.compare-grid .claim-list .row{padding:20px 0;}
 @media (max-width:820px){
   .compare-grid{grid-template-columns:1fr; gap:0;}
 }
