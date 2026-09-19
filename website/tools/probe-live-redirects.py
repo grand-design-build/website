@@ -26,6 +26,7 @@ from http.client import HTTPResponse
 HERE = os.path.dirname(os.path.abspath(__file__))
 WEB  = os.path.dirname(HERE)
 GDB  = os.path.dirname(WEB)
+REPO_ROOT = os.path.dirname(GDB)
 SITE = "https://granddesignbuild.com"
 DEST = os.path.join(GDB, "_archive", "wordpress-era")
 UA   = {"User-Agent": "gdb-migration/1.0"}
@@ -53,7 +54,7 @@ def candidates():
         except Exception as e:
             print("  could not read %s: %s" % (name, e), file=sys.stderr)
 
-    gsc = os.path.join(GDB, "marketing", "research", "audit-data",
+    gsc = os.path.join(REPO_ROOT, "audit-data",
                        "raw", "gsc", "unzipped", "Pages.csv")
     if os.path.exists(gsc):
         with open(gsc) as fh:

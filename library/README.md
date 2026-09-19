@@ -5,80 +5,105 @@ Clients sign in, browse finishes room by room, build a palette and compare
 options side by side. The team adds and removes products, hands out access, and
 watches what each client is choosing — all from `/admin.html`.
 
-A Google Sheet is underneath, but it is **storage, not an interface**: nobody on
-the team needs to open it.
+Storage is a blob store behind the API: nobody on the team opens a spreadsheet,
+and there is no spreadsheet to open.
 
-**No build step. No dependencies. No framework.** Four files of CSS/JS and a
-Google Apps Script backend. Drop the folder on Netlify and it runs.
+**No framework, no bundler.** Four files of CSS/JS on the front, one Netlify
+Function behind. The site's build step is a python script that stamps the shared
+header and footer into each page.
 
 ---
 
-## Deploying to Netlify
+## Deploying
 
-**Drag and drop:** open Netlify, drag this `material-library-site` folder onto
-the deploy area. Done.
+The library is **part of the main site**, not a separate deploy. `build.py`
+copies this folder into `website/_site/material-selections/`, and the API runs
+as a Netlify Function beside it.
 
-**From the repo:**
+Connect the repo to Netlify. `netlify.toml` at the repo root already declares
+everything:
 
 | Setting | Value |
 | --- | --- |
-| Build command | *(leave empty)* |
-| Publish directory | `material-library-site` |
+| Build command | `python3 website/tools/build.py` |
+| Publish directory | `website/_site` |
+| Functions directory | `netlify/functions` |
 
-`netlify.toml` already sets the security headers and the caching rules. CSS and
-JS are set to revalidate on every request, so a redeploy is picked up straight
-away rather than sitting behind a stale cache.
+No database, no second account, no connection string. Blob storage is created
+on the first write.
 
-### Putting it on a path of the main site
-
-The library assumes it is at the site root. To serve it at `/materials`:
-
-- Either publish this folder to that path in your main build, or
-- add a Netlify redirect: `/materials/* /material-library-site/:splat 200`
-
-All asset paths are relative, so it works from any directory. The only
-requirement is that `index.html` and `assets/` stay together.
+All asset paths inside the library are relative, so it does not care what path
+it is served at — only that `index.html` and `assets/` stay together.
 
 ---
 
 ## How it fits together
 
 ```
-Google Sheet  ──  Apps Script web app  ──  index.html   (clients)
-(catalogue,       (login, catalogue,    └─  admin.html  (your team)
- clients,          selections)
- selections)
+Netlify Blobs  ──  /api  (one function)  ──  index.html   (clients)
+(catalogue,        login, catalogue,      └─  admin.html  (your team)
+ clients,          selections, and
+ selections,       everything the
+ settings)         dashboard writes
 ```
 
-**Nothing is public.** The catalogue is no longer bundled with the site and is
-not served until someone has signed in. The old build shipped all 436 products
-as a JSON file and put the sheet's URL and key in the page source — both are
-gone.
+Same origin, so there is no CORS hop and no third party in the path.
 
-## Status — this is already deployed
+**Nothing is public.** The catalogue is not bundled with the site and is not
+served until someone has signed in. An early build shipped all 436 products as
+a JSON file with the sheet's URL and key in the page source; both are long gone.
+The supplier link on a product is stripped before the catalogue leaves the
+server — where we buy it is ours, not the client's.
 
-The backend is live. You do not need to run any of the setup.
+## Status — where it runs
+
+The library used to run on Google Apps Script with a spreadsheet behind it. It
+does not any more. **It is one Netlify Function with blob storage**, served from
+the same origin as the site, and it is roughly five hundred times faster.
+
+| | Apps Script + Sheet | now |
+| --- | --- | --- |
+| sign in | 2–3s | 8ms |
+| load the catalogue | 6–10s | 12ms |
+| overview | 2.5–4s | 5ms |
+
+Speed was not the only reason. Apps Script runs **one execution at a time per
+account**, so two calls queued instead of overlapping. A new deployment 404s for
+a minute or two. Under load a POST comes back with the *health-check* reply, or
+a Google error page. And a spreadsheet's own data-validation can reject a write
+**after** the response has been sent, which reaches the browser as a network
+failure with nothing to diagnose — that is what blocked four rooms from being
+imported at all.
+
+### What is where
 
 | | |
 | --- | --- |
-| Apps Script project | **Material Library API** (standalone, at script.google.com) |
-| Deployment | Version 11, execute as *you*, access *Anyone* |
-| Endpoint | already pasted into `CFG.API` in `assets/js/data.js` |
-| Sheet tabs created | `Clients`, `Selections`, `Settings` |
-| Every product | stamped with a hidden `GDB ID` column so edits target a row, not a position |
-| Team password | on the sheet's **Settings** tab, key `ADMIN_CODE`, and changeable from the dashboard's Settings page |
-| Drive | a folder called *GDB Material Library Photos* holds anything uploaded from the dashboard |
+| `netlify/functions/api.mjs` | every action, in one file |
+| `netlify/functions/lib/store.mjs` | Netlify Blobs, or local JSON files in dev |
+| `netlify/functions/lib/auth.mjs` | HMAC-signed session tokens |
+| `netlify.toml` (repo root) | build command, publish dir, functions dir, `/api` |
+| `website/tools/dev-api.mjs` | the same handler, locally, serving the site too |
 
-It is a **separate project** from the bound script that still serves the
-published `/material-selections/` WordPress page. That one was not touched and
-keeps working.
+Data is four kinds of blob: `catalogue`, `clients`, `settings`, and one key per
+client for their selections — so two clients choosing at the same moment write
+to different places and cannot overwrite each other.
 
-### If you ever need to redeploy
+### Running it locally
 
-After editing `tools/material-library-backend.gs`: paste it into the project,
-save, then **Deploy → Manage deployments → pencil → Version: New version →
-Deploy**. Keep the same deployment so the URL does not change. Saving alone does
-nothing.
+```
+GDB_LOCAL_STORE=/tmp/gdb-blobs node website/tools/dev-api.mjs
+```
+
+That serves `website/_site` **and** `/api` on one origin, which is how Netlify
+serves it, so what you test is what ships. Build the site first.
+
+### Deploying
+
+Connect this repo to Netlify. Nothing else — no database, no second account, no
+connection string. `netlify.toml` already declares the build command, the
+publish directory and where the function lives. Blob storage is created on
+first write.
 
 ## Giving a client access
 
@@ -148,19 +173,12 @@ best; that is how the client-facing cards are built.
 
 ### How fast it is
 
-Apps Script is the slow part, and nothing about that changes: reading the whole
-catalogue is about six seconds, a save about two. So the catalogue is fetched
-**once when you sign in** and everything after that is drawn from memory —
-switching between Overview, Clients and Products costs nothing. **Refresh** in the
-header re-reads from the sheet when you want to be sure.
+Fast enough not to think about: a few milliseconds a call. The catalogue is
+still fetched once per sign-in and held for the session, so switching between
+Overview, Clients and Products costs nothing at all. **Refresh** in the header
+re-reads when you want to be certain.
 
-If a save ever comes back with *"That took too long to confirm"*, hit Refresh and
-look before doing it again. Under load Apps Script can answer a request with the
-wrong reply; reads are retried automatically, but a write is never repeated on its
-own, because a repeated *create* would leave you with two of something.
-
-The raw rows are on the sheet if you ever want them, but nothing on the team side
-needs you to open it.
+Everything lives behind the dashboard. There is no second place to go and look.
 
 ## What clients can and cannot do
 
@@ -182,7 +200,7 @@ In `assets/js/data.js`:
 
 | Setting | What it does |
 | --- | --- |
-| `API` | The Apps Script web app URL. **Required.** |
+| `API` | Where the library's API lives. `/api` — same origin as the page. |
 | `SHOW_PRICES` | `false` hides every price from clients. |
 | `COMPARE_MAX` | How many items compare side by side. Default 3. |
 
@@ -194,9 +212,6 @@ On the sheet's **Settings** tab:
 | `SESSION_HOURS` | How long a client stays signed in. Default 12. Also on that page. |
 | `DRIVE_FOLDER` | Where uploaded photos go. Created for you — leave it alone. |
 | `TOKEN_SECRET` | Signs the session tokens. Generated for you — leave it alone. Changing it signs everyone out. |
-
-**After editing the Apps Script, redeploy it** (Deploy → Manage deployments →
-pencil → New version). Saving alone changes nothing.
 
 **After editing CSS or JS, bump the `?v=` number** on the asset links in
 `index.html` and `admin.html`. That is what forces browsers to pick the change up.

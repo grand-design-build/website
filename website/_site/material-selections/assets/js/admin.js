@@ -52,7 +52,7 @@ function call(action, body, again){
   inFlight++;
   return fetch(GDB.CFG.API, {
     method: "POST",
-    headers: { "Content-Type": "text/plain;charset=utf-8" },
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify(payload)
   })
   .then(function(r){ return r.text(); })
@@ -892,7 +892,6 @@ function loadSettings(){
     A.loaded.settings = true;
     $("#setCode").value = d.code || "";
     $("#setHours").value = d.hours || 12;
-    $("#setSheet").href = d.sheet || "#";
   }).catch(oops);
 }
 

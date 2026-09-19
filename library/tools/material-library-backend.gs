@@ -83,6 +83,7 @@ var FIELDS = [
   { key:"sku",      head:"SKU",               names:["sku","code","model"] },
   { key:"leadTime", head:"Lead Time",         names:["leadtime","lead"] },
   { key:"supplier", head:"Supplier",          names:["supplier","vendor"] },
+  { key:"source",   head:"Source Link",       names:["sourcelink","source","producturl","vendorlink"] },
   { key:"active",   head:"Active",            names:["active"] },
   { key:"id",       head:"GDB ID",            names:["gdbid"] }
 ];
@@ -259,6 +260,8 @@ function catalog(req){
   /* Same single pass the dashboard uses, minus anything switched off. One
      implementation means the two sides can never drift apart. */
   var live = scanCatalogue(false).products.filter(function(p){ return p.active; });
+  /* Where we buy it is ours, not the client's -- strip it before it leaves. */
+  live.forEach(function(p){ delete p.source; });
   return { products: live, areas: readAreas() };
 }
 
@@ -674,7 +677,8 @@ function scanCatalogue(stamp){
         colors: splitList(pick(rows[r], col, ["colours","colors","colour","color","finish","finishes"])),
         sku:      str(pick(rows[r], col, ["sku","code","model"])),
         leadTime: str(pick(rows[r], col, ["leadtime","lead"])),
-        supplier: str(pick(rows[r], col, ["supplier","vendor"]))
+        supplier: str(pick(rows[r], col, ["supplier","vendor"])),
+        source:   str(pick(rows[r], col, ["sourcelink","source","producturl","vendorlink"]))
       });
     }
 

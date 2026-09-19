@@ -6,10 +6,12 @@
 window.GDB = window.GDB || {};
 
 GDB.CFG = {
-  /* The Apps Script web app. Deploy tools/material-library-backend.gs as a NEW
-     deployment and paste its URL here -- the old deployment stays untouched so
-     the published WordPress page keeps working. */
-  API: "https://script.google.com/macros/s/AKfycbyTRfct3GenZ2E5Po84-EaV0pZaZgjdCl3pOWY4ffDUZBAES7DQH_-WKV8_oy98Y0zq/exec",
+  /* The library's own API, running as a Netlify Function beside the site. It is
+     the same origin as the page, so there is no CORS hop and no third party in
+     the path. It replaced a Google Apps Script backend that read the catalogue
+     out of a spreadsheet: that took six to ten seconds and could only run one
+     request at a time per account, so calls queued behind each other. */
+  API: "/api",
 
   SHOW_PRICES: true,
   COMPARE_MAX: 3,
@@ -45,7 +47,7 @@ GDB.call = function(action, body, again){
 
   return fetch(GDB.CFG.API, {
     method: "POST",
-    headers: { "Content-Type": "text/plain;charset=utf-8" },
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify(payload)
   })
   .then(function(r){ return r.text(); })
@@ -92,11 +94,14 @@ GDB.ROOM_PHOTO = {
   "Lighting":           "assets/img/rooms/lighting.jpg",
   "Railing":            "assets/img/rooms/railing.jpg",
   "Exterior Finishes":  "assets/img/rooms/exterior-finishes.jpg"
+  /* Tiles and Paint arrived with the Houzz library and have no photograph of
+     their own yet. Drop a jpg in assets/img/rooms/ and name it here; until
+     then their tile falls back to the plain card. */
 };
 
 /* Rooms appear in this order; anything unlisted follows, alphabetically. */
-GDB.ROOM_ORDER = ["Kitchen","Bathroom","Flooring","Doors","Windows",
-                  "Trims","Hardware","Lighting","Railing","Exterior Finishes"];
+GDB.ROOM_ORDER = ["Kitchen","Bathroom","Tiles","Flooring","Doors","Windows",
+                  "Trims","Hardware","Lighting","Railing","Exterior Finishes","Paint"];
 
 /* -------------------------------------------------------------- utilities */
 GDB.esc = function(s){

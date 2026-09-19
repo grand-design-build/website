@@ -38,6 +38,20 @@
      a bare "r, g, b" triplet -- the script supplies the alpha. */
   --pencil-rgb:84, 89, 95;  /* Charcoal -- graphite on paper           */
   --blueprint:#C3C6C9;
+
+  /* type scale. Fonts stay as set in site.css (Playfair Display for
+     headings, Lato for body) -- these tokens are sizes only. 8 steps,
+     matching the scale pattern used in B3 Interiors and Clear Countertops.
+     Never hard-code a font-size anywhere else; add a step here if one is
+     genuinely missing, don't reach for a raw value. */
+  --text-xs:0.75rem;     /* 12px -- fine print, timestamps           */
+  --text-sm:0.875rem;    /* 14px -- captions, meta, labels           */
+  --text-base:1rem;      /* 16px -- body copy                        */
+  --text-lg:1.125rem;    /* 18px -- lead paragraphs, large body      */
+  --text-xl:1.25rem;     /* 20px -- subheads, H4                     */
+  --text-2xl:1.5rem;     /* 24px -- card titles, H3                  */
+  --text-3xl:1.875rem;   /* 30px -- H2                               */
+  --text-hero:clamp(2.25rem, 5vw, 3.5rem); /* hero, H1               */
 }
 
 

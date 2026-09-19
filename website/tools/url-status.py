@@ -11,13 +11,15 @@ batch of migration work. It exits non-zero while anything is still MISSING or
 pointing at a redirect target that does not exist, so it can gate the launch.
 
 Reads the live sitemaps over the network. Falls back to the saved copies in
-marketing/research/audit-data/ if the network is unavailable.
+the repo's own audit-data/ (not inside website-build/ - that copy was a
+stale duplicate, removed 2026-09-18) if the network is unavailable.
 """
 import os, re, sys, csv, json, time, urllib.request
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 WEB  = os.path.dirname(HERE)
 GDB  = os.path.dirname(WEB)
+REPO_ROOT = os.path.dirname(GDB)
 SITE = "https://granddesignbuild.com"
 
 # Live, return 200, and in NO sitemap. Found by probe-live-redirects.py.
@@ -113,7 +115,7 @@ def redirects():
 
 def clicks():
     out = {}
-    path = os.path.join(GDB, "marketing", "research", "audit-data",
+    path = os.path.join(REPO_ROOT, "audit-data",
                         "raw", "gsc", "unzipped", "Pages.csv")
     if not os.path.exists(path):
         return out

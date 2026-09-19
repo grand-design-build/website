@@ -145,7 +145,7 @@ impossible to read. Take the photograph while you still can.
       of them do real work nobody had accounted for.
 - [ ] **Export Search Console data** fresh, close to launch: Performance → last 16 months,
       plus the Pages, Queries and Index Coverage reports.
-      *(The 2026-09-09 export is already in `marketing/research/audit-data/raw/gsc/`.)*
+      *(The 2026-09-09 export is already in `audit-data/raw/gsc/`.)*
 - [ ] **Export GA4 data** you will want to compare against later: pages, channels, events.
       *(Also already saved, same folder.)*
 - [ ] **Record the current DNS zone in full** — every record, exact values, TTLs. Screenshot
@@ -173,7 +173,7 @@ home on the new site or a decision to drop it.
 - [ ] **54 blog posts** — decide for each: rebuild, merge into another post, or retire and
       redirect. The audit already did this analysis: 203 of 341 tracked URLs have never
       had a single click. Those are safe to redirect rather than rebuild.
-      *(See `marketing/research/audit-data/findings/page-migration-plan-2026-09-15.md`.)*
+      *(See `audit-data/findings/page-migration-plan-2026-09-15.md`.)*
 - [ ] **11 neighbourhood pages** — 5 built, 6 still live on WordPress and not yet built.
 - [ ] **8 service pages** — all 8 built. Check the copy matches or improves on the live one.
 - [ ] **Home, About, Portfolio, Contact, Blog index** — all built.
@@ -184,7 +184,7 @@ home on the new site or a decision to drop it.
       **You need a privacy policy at launch** — you collect personal data through a form
       and run analytics. See Stage 5.
 - [ ] **Portfolio project photography** — confirm every image used on the live portfolio is
-      in `marketing/photos/` and re-published from your own domain.
+      in `brand-assets/` and re-published from your own domain.
 - [ ] **Any PDF, brochure or download** linked from the site.
 
 ### Things that are not pages
@@ -595,7 +595,7 @@ The current `_headers` file has a reasonable start. Add:
       **Decide deliberately** — do not let it be an accident.
 - [ ] Confirm the form's consent language, and that ticking it is recorded in HubSpot.
 - [ ] Confirm no personal data ends up in a URL, a query string, or a GA4 event parameter.
-- [ ] The audit exports in `marketing/research/audit-data/raw/` contain real contact
+- [ ] The audit exports in `audit-data/raw/` contain real contact
       records. **Those never go near the published site or a public repo.**
 
 ### Email deliverability — since you are touching DNS anyway

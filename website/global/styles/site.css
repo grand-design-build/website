@@ -29,10 +29,19 @@ h1,h2,h3{
 .wrap{max-width:1120px; margin:0 auto; padding:0 32px;}
 
 /* nav */
+/* .nav stays full-width for its background/border/sticky behavior; .nav-inner
+   constrains the actual logo+menu to the same 1120px column as the rest of
+   the page, so the header lines up with the content below it instead of
+   floating to the true screen edges on a wide viewport. */
 .nav{
-  display:flex; align-items:center; justify-content:space-between; gap:16px;
-  padding:14px 32px; border-bottom:1px solid var(--rule); flex-wrap:nowrap;
+  display:flex; align-items:center; justify-content:center;
+  padding:0; border-bottom:1px solid var(--rule); flex-wrap:nowrap;
   position:sticky; top:0; background:var(--bg); z-index:50;
+}
+.nav-inner{
+  display:flex; align-items:center; justify-content:space-between; gap:16px;
+  width:100%; max-width:1120px; margin:0 auto; box-sizing:border-box;
+  padding:14px 32px;
 }
 .nav-right{display:flex; align-items:center; gap:16px; flex:none;}
 .nav-phone{
@@ -99,11 +108,14 @@ h1,h2,h3{
 .dropdown a:hover{background:var(--bg-soft); color:var(--accent);}
 .btn{
   display:inline-block; background:var(--accent); color:#fff; text-decoration:none;
-  font-weight:600; font-size:0.84rem; padding:13px 26px; border-radius:3px;
+  font-weight:600; font-size:0.84rem; padding:13px 26px; border-radius:999px;
   letter-spacing:0.03em; white-space:nowrap; flex:none;
   border:none; font-family:inherit; cursor:pointer;
+  transition:background 0.2s ease, transform 0.2s ease;
 }
+.btn:hover{background:var(--accent-dark); transform:translateY(-1px);}
 .btn.outline{background:transparent; border:1px solid var(--ink); color:var(--ink);}
+.btn.outline:hover{background:var(--ink); color:#fff;}
 .nav .btn{font-size:0.78rem; padding:11px 18px;}
 
 /* hero */
@@ -165,6 +177,7 @@ h1,h2,h3{
 }
 .hero .eyebrow::after{content:""; display:block; width:32px; height:2px; background:var(--accent); margin:16px auto 0;}
 .hero .btn.outline, .final .btn.outline{border-color:rgba(255,255,255,0.55); color:#fff;}
+.hero .btn.outline:hover, .final .btn.outline:hover{background:rgba(255,255,255,0.15); color:#fff;}
 .hero p{font-size:1.05rem; line-height:1.75; color:#e9e3d7; max-width:52ch; margin:20px auto 30px; font-weight:300;}
 .hero-video-note{
   margin-top:26px; font-size:0.76rem; color:#c9bfae; border:1px dashed rgba(255,255,255,0.35);
@@ -191,6 +204,39 @@ section{padding:76px 0;}
 .eyebrow::after{content:""; display:block; width:32px; height:2px; background:var(--accent); margin:14px auto 0;}
 .sec-title{text-align:center; font-size:clamp(1.9rem,3.6vw,2.6rem); font-weight:500; margin:22px 0 16px; text-wrap:balance;}
 .sec-sub{text-align:center; color:var(--ink-soft); max-width:56ch; margin:0 auto 48px; line-height:1.7; font-size:1rem; font-weight:300;}
+
+/* Homepage only -- left-aligned section headers, matching the Swede-flow
+   restructure. Every other page (about, services, locations) still reuses
+   these same .eyebrow/.sec-title/.sec-sub classes centered, so this is
+   scoped to body.home rather than changed globally. */
+body.home .eyebrow{text-align:left;}
+body.home .eyebrow::after{margin:14px 0 0;}
+body.home .sec-title{text-align:left;}
+body.home .sec-sub{text-align:left; margin:0 0 48px;}
+
+/* Homepage hero only -- .hero is shared across 25+ pages (contact, portfolio,
+   blog, every location page), so its default stays centered and this scopes
+   the left-aligned treatment to body.home specifically. */
+body.home .hero{justify-content:flex-start; text-align:left;}
+body.home .hero-inner{width:100%; max-width:1120px; margin:0 auto; box-sizing:border-box; padding:80px 32px;}
+body.home .hero .eyebrow::after{margin:16px 0 0;}
+body.home .hero p{margin:20px 0 30px;}
+body.home .hero-ctas{justify-content:flex-start;}
+
+/* claim-list -- numbered, left-aligned rows with a claim headline and a short
+   kicker tag, used on the homepage's Why Us and How It Works sections. New,
+   separate from .why-grid/.why-item and .steps/.step, which stay untouched
+   since about.html, the service pages and the location pages all reuse them. */
+.claim-list{display:flex; flex-direction:column; margin-top:8px;}
+.claim-list .row{display:grid; grid-template-columns:56px 1fr; gap:24px; padding:30px 0; border-top:1px solid var(--rule);}
+.claim-list .row:last-child{border-bottom:1px solid var(--rule);}
+.claim-list .n{font-family:"Playfair Display",serif; color:var(--accent); font-size:1.5rem; font-weight:700;}
+.claim-list h3{font-size:1.15rem; font-weight:600; margin-bottom:8px; max-width:34ch;}
+.claim-list p{color:var(--ink-soft); margin:0 0 10px; max-width:56ch; line-height:1.6;}
+.claim-list .kicker{font-size:0.72rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--accent-dark);}
+@media (max-width:680px){
+  .claim-list .row{grid-template-columns:1fr; gap:8px;}
+}
 
 /* services */
 .services{display:grid; grid-template-columns:repeat(5,1fr); gap:14px;}
@@ -242,12 +288,16 @@ section{padding:76px 0;}
 .steps > *{flex:1 1 calc((100% - 40px)/3); max-width:calc((100% - 40px)/3);}
 /* four-up variant — a four-stage process reads as one row, not 3 + a stray. */
 .steps.four-up > *{flex-basis:calc((100% - 60px)/4); max-width:calc((100% - 60px)/4);}
-.step{text-align:left; padding-top:6px; position:relative; overflow:hidden;}
-.step .n{
-  position:absolute; top:-20px; right:0; font-family:"Playfair Display",serif; font-weight:700;
-  font-size:4rem; color:var(--rule); line-height:1; z-index:0; user-select:none;
+.step{
+  text-align:left; position:relative; overflow:hidden;
+  background:var(--card); border:1px solid var(--card-line); border-radius:3px;
+  padding:22px 22px 24px;
 }
-.step h3{position:relative; z-index:1; font-size:0.98rem; margin-bottom:6px; max-width:80%;}
+.step .n{
+  position:absolute; top:4px; right:14px; font-family:"Playfair Display",serif; font-weight:700;
+  font-size:3rem; color:var(--rule); line-height:1; z-index:0; user-select:none;
+}
+.step h3{position:relative; z-index:1; font-size:0.98rem; margin-bottom:6px; max-width:calc(100% - 54px);}
 .step p{position:relative; z-index:1; font-size:0.82rem; color:var(--ink-soft); line-height:1.5; margin:0;}
 
 /* reviews */
@@ -385,7 +435,7 @@ footer{background:var(--bg-soft); border-top:1px solid var(--rule); padding:48px
      button and the hamburger; everything else moves into a drawer. Before
      this existed the menu was simply hidden and a phone visitor -- over half
      of all our traffic -- could not navigate the site at all. */
-  .nav{padding:12px 16px;}
+  .nav-inner{padding:12px 16px;}
   .nav-bar-cta{display:none;}
   .nav-phone-num{display:none;}          /* the number hides behind the icon */
   .nav-phone{padding:8px; margin:-8px 0;}
@@ -424,7 +474,7 @@ footer{background:var(--bg-soft); border-top:1px solid var(--rule); padding:48px
 @media (max-width:520px){
   .services, .rev-grid, .blog-grid{grid-template-columns:1fr;}
   .why-grid > *, .why-grid.three-up > *{flex-basis:100%; max-width:100%;}
-  .steps{grid-template-columns:1fr 1fr;}
+  .steps > *, .steps.four-up > *{flex-basis:100%; max-width:100%;}
   .areas-grid{grid-template-columns:1fr 1fr;}
 }
 
@@ -738,4 +788,27 @@ table.data-table td.num{color:var(--accent); font-weight:700; white-space:nowrap
   .sheet-item .shot{height:210px;}
   .sheet-head{gap:14px;}
   .sheet-head .count{display:none;}
+}
+
+/* ---------------------------------------------------------------- nav guard
+   57 of the 78 pages still carry a stale, hand-copied duplicate of this
+   stylesheet in a page-level <style> block. Because that block is parsed
+   AFTER this file, its old header rules win, and the ones it is missing --
+   chiefly hiding the desktop "Start Your Project" button below 680px --
+   pushed the hamburger off the right edge. The result was a page wider than
+   the phone on 56 of 78 pages, up to 361px of sideways scroll, on the device
+   that carries over half of our traffic.
+
+   !important here beats a normal declaration in a page's <style> no matter
+   what order they appear in, so the mobile header is correct everywhere
+   while the duplicated CSS is still being unpicked page by page.
+
+   DELETE THIS BLOCK once no page carries its own copy of the header rules.
+   Check with:  grep -rl "nav-toggle" webpages --include='*.html'                */
+@media (max-width:680px){
+  .nav-inner{padding:12px 16px !important;}
+  .nav-bar-cta{display:none !important;}
+  .nav-phone-num{display:none !important;}
+  .nav-toggle{display:block !important;}
+  .nav-right{gap:6px !important;}
 }
