@@ -343,20 +343,27 @@ body.home .hero-ctas{justify-content:flex-start;}
 .why{background:var(--bg); border-top:1px solid var(--rule); border-bottom:1px solid var(--rule);}
 
 /* Two-column "why us / compare" layout, homepage only -- left column is the
-   pitch (eyebrow, headline, one line, a CTA), right column is the existing
-   numbered .claim-list. Same shape as Swede's "Why Swede" section. */
-.compare-grid{display:grid; grid-template-columns:1fr 1.3fr; gap:36px; align-items:start;}
+   pitch (eyebrow, headline, a CTA), right column is the existing numbered
+   .claim-list. Same shape as Swede's "Why Swede" section. Left column is
+   sticky (stays in view while the right column scrolls past it) -- needs
+   align-items:start on the grid, which was already set, so the sticky
+   column has room to move within the grid's own height. */
+.compare-grid{display:grid; grid-template-columns:0.8fr 1.4fr; gap:28px; align-items:start;}
+.compare-intro{position:sticky; top:var(--nav-h, 90px);}
 .compare-intro .eyebrow{text-align:left;}
 .compare-intro .eyebrow::after{display:none;}
 .compare-intro .eyebrow.rule-left{display:flex; align-items:center; gap:10px;}
 .compare-intro .eyebrow.rule-left::before{content:""; display:block; width:20px; height:1px; background:var(--ink-faint);}
-.compare-intro .sec-title{text-align:left; margin-top:14px;}
-.compare-intro .sec-sub{text-align:left; margin-left:0;}
+.compare-intro .sec-title{text-align:left; margin-top:10px; line-height:1.15;}
+.compare-intro .sec-title .cap{text-transform:uppercase;}
+.compare-intro .sec-title .cap-em{text-transform:uppercase; font-style:italic;}
 .highlight{background:var(--accent-tint); padding:0 6px; box-decoration-break:clone; -webkit-box-decoration-break:clone;}
 .compare-grid .claim-list{margin-top:0;}
-.compare-grid .claim-list .row{padding:20px 0;}
+.compare-grid .claim-list .row{padding:14px 0;}
+.compare-grid .claim-list h3{font-size:var(--text-base);}
 @media (max-width:820px){
   .compare-grid{grid-template-columns:1fr; gap:0;}
+  .compare-intro{position:static;}
 }
 .why-grid{display:flex; flex-wrap:wrap; justify-content:center; gap:28px;}
 .why-grid > *{flex:1 1 calc((100% - 84px)/4); max-width:calc((100% - 84px)/4);}
