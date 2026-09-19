@@ -46,9 +46,9 @@ h1,h2,h3{
 .nav-right{display:flex; align-items:center; gap:16px; flex:none;}
 .nav-phone{
   display:inline-flex; align-items:center; gap:7px;
-  font-size:0.86rem; font-weight:700; color:var(--ink); text-decoration:none; white-space:nowrap;
+  font-size:var(--text-base); font-weight:700; color:var(--ink); text-decoration:none; white-space:nowrap;
 }
-.nav-phone .ico{flex:none;}
+.nav-phone .ico{flex:none; width:20px; height:20px;}
 .nav-phone:hover{color:var(--accent);}
 
 /* The hamburger. Hidden until the menu collapses. */
@@ -88,7 +88,7 @@ body.home .nav{
   transition:background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 body.home .nav-inner > ul > li > a{color:#fff;}
-body.home .nav-inner > ul > li > a::after{background:#fff;}
+body.home .nav-inner > ul > li > a::after{background:var(--accent);}
 body.home .nav-phone{color:#fff;}
 body.home .nav-phone:hover{color:var(--accent);}
 body.home .nav-toggle{color:#fff;}
@@ -123,7 +123,7 @@ body.home.scrolled .logo img:not(.logo-invert){filter:none;}
 .breadcrumb a:hover{color:var(--accent); text-decoration:underline;}
 .breadcrumb .sep{margin:0 8px; color:var(--rule);}
 .breadcrumb .here{color:var(--ink-faint);}
-.nav ul{list-style:none; display:flex; gap:22px; margin:0; padding:0; font-size:var(--text-base); font-weight:600; flex:none;}
+.nav ul{list-style:none; display:flex; gap:22px; margin:0; padding:0; font-size:var(--text-sm); font-weight:600; flex:none;}
 .nav ul a{color:var(--ink); text-decoration:none; white-space:nowrap;}
 .nav-inner > ul > li > a{position:relative; display:inline-block; padding-bottom:6px;}
 .nav-inner > ul > li > a::after{
@@ -139,6 +139,12 @@ body.home.scrolled .logo img:not(.logo-invert){filter:none;}
   box-shadow:0 10px 28px rgba(0,0,0,0.14);
 }
 .dropdown.open{display:block;}
+/* Desktop: hover opens the dropdown directly, no click needed. Below 680px
+   there's no hover to speak of (touch), so the click-toggle in site.js
+   stays the only way in on mobile -- this rule simply doesn't apply there. */
+@media (min-width:681px){
+  .nav-inner > ul > li:hover .dropdown{display:block;}
+}
 .dropdown a{display:block; padding:10px 16px; font-size:0.84rem; font-weight:600; color:var(--ink); text-decoration:none; white-space:nowrap;}
 .dropdown a:hover{background:var(--bg-soft); color:var(--accent);}
 .btn{
@@ -151,7 +157,7 @@ body.home.scrolled .logo img:not(.logo-invert){filter:none;}
 .btn:hover{background:var(--accent-dark); transform:translateY(-1px);}
 .btn.outline{background:transparent; border:1px solid var(--ink); color:var(--ink);}
 .btn.outline:hover{background:var(--ink); color:#fff;}
-.nav .btn{font-size:0.78rem; padding:11px 18px;}
+.nav .btn{font-size:var(--text-sm); padding:13px 24px;}
 
 /* hero */
 .hero{
