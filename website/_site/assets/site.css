@@ -125,7 +125,7 @@ body.home.scrolled .logo img:not(.logo-invert){filter:none;}
 .breadcrumb .here{color:var(--ink-faint);}
 .nav ul{list-style:none; display:flex; gap:22px; margin:0; padding:0; font-size:var(--text-base); font-weight:600; flex:none;}
 .nav ul a{color:var(--ink); text-decoration:none; white-space:nowrap;}
-.nav-inner > ul > li > a{position:relative; display:inline-block; padding-bottom:6px;}
+.nav-inner > ul > li > a{position:relative; display:inline-block; padding-bottom:6px; text-transform:uppercase; letter-spacing:0.03em;}
 .nav-inner > ul > li > a::after{
   content:""; position:absolute; left:0; right:0; bottom:0; height:2px; background:var(--accent);
   transform:scaleX(0); transform-origin:left; transition:transform 0.2s ease;
