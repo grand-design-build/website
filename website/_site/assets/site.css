@@ -230,10 +230,10 @@ body.home .hero-ctas{justify-content:flex-start;}
 .claim-list{display:flex; flex-direction:column; margin-top:8px;}
 .claim-list .row{display:grid; grid-template-columns:56px 1fr; gap:24px; padding:30px 0; border-top:1px solid var(--rule);}
 .claim-list .row:last-child{border-bottom:1px solid var(--rule);}
-.claim-list .n{font-family:"Playfair Display",serif; color:var(--accent); font-size:1.5rem; font-weight:700;}
-.claim-list h3{font-size:1.15rem; font-weight:600; margin-bottom:8px; max-width:34ch;}
-.claim-list p{color:var(--ink-soft); margin:0 0 10px; max-width:56ch; line-height:1.6;}
-.claim-list .kicker{font-size:0.72rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--accent-dark);}
+.claim-list .n{font-family:"Playfair Display",serif; color:var(--accent); font-size:var(--text-2xl); font-weight:700;}
+.claim-list h3{font-size:var(--text-xl); font-weight:600; margin-bottom:8px; max-width:34ch;}
+.claim-list p{font-size:var(--text-base); color:var(--ink-soft); margin:0 0 10px; max-width:56ch; line-height:1.6;}
+.claim-list .kicker{font-size:var(--text-xs); font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--accent-dark);}
 @media (max-width:680px){
   .claim-list .row{grid-template-columns:1fr; gap:8px;}
 }
