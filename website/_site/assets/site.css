@@ -268,11 +268,16 @@ body.home .hero{justify-content:flex-start; text-align:left;}
    1440px wide, logo at x=192, hero text at x=32). The narrower left-hand
    column now comes from a max-width on the text elements themselves,
    below, not from constraining this positioning box. */
-body.home .hero-inner{width:100%; max-width:1120px; margin:0 auto; box-sizing:border-box; padding:80px 32px 48px;}
+body.home .hero-inner{width:100%; max-width:1120px; margin:0 auto; box-sizing:border-box; padding:64px 32px 32px;}
 body.home .hero-inner .hero-tagline,
 body.home .hero-inner p{max-width:640px;}
 body.home .hero .eyebrow::after{margin:16px 0 0;}
-body.home .hero p{margin:20px 0 30px;}
+/* Equal 20px rhythm between badge, tagline, subhead and CTAs -- each
+   element carries only a bottom margin, so the gaps stay consistent
+   instead of stacking a top margin on one side against a bottom margin
+   on the other (which is what produced 30/40/30px before). */
+body.home .hero-inner .hero-tagline{margin:0 0 20px;}
+body.home .hero p{margin:0 0 20px;}
 
 /* Homepage H1: still a real <h1> for SEO, but styled as a quiet pill badge
    (B3 Interiors does the same thing with "Whole-Home Millwork. One
@@ -285,7 +290,7 @@ body.home .hero-inner h1{
   font-size:var(--text-xs); font-weight:600; letter-spacing:0.02em;
   color:#e9e3d7; line-height:1.4;
   background:rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.22);
-  border-radius:999px; padding:8px 18px; margin:0 0 22px;
+  border-radius:999px; padding:8px 18px; margin:0 0 20px;
 }
 body.home .hero-ctas{justify-content:flex-start;}
 
