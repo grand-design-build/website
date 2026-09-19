@@ -259,13 +259,19 @@ body.home .sec-sub{text-align:left; margin:0 0 48px;}
    blog, every location page), so its default stays centered and this scopes
    the left-aligned treatment to body.home specifically. */
 body.home .hero{justify-content:flex-start; text-align:left;}
-/* Narrower than the page's usual 1120px column, and margin:0 rather than
-   auto -- an auto margin on a flex item overrides the parent's
-   justify-content:flex-start, which would have silently re-centered this
-   at wide viewports. Keeps the hero copy in a left-hand column with the
-   photo/video showing through on the right, the way B3 Interiors' hero
-   does. */
-body.home .hero-inner{width:100%; max-width:640px; margin:0; box-sizing:border-box; padding:80px 32px;}
+/* Same positioning formula as .nav-inner (max-width:1120px, margin:0 auto,
+   32px side padding) so the hero text starts at the exact same x as the
+   logo at every viewport width. An earlier version capped .hero-inner
+   itself at 640px with margin:0 -- that kept it flush against the true
+   left edge instead of following .nav-inner's centering past 1184px,
+   so at a wide desktop the logo and hero text drifted apart (confirmed:
+   1440px wide, logo at x=192, hero text at x=32). The narrower left-hand
+   column now comes from a max-width on the text elements themselves,
+   below, not from constraining this positioning box. */
+body.home .hero-inner{width:100%; max-width:1120px; margin:0 auto; box-sizing:border-box; padding:80px 32px 48px;}
+body.home .hero-inner h1,
+body.home .hero-inner .hero-tagline,
+body.home .hero-inner p{max-width:640px;}
 body.home .hero .eyebrow::after{margin:16px 0 0;}
 body.home .hero p{margin:20px 0 30px;}
 body.home .hero-ctas{justify-content:flex-start;}
